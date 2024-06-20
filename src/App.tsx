@@ -1,10 +1,11 @@
+import "@mantine/core/styles.css";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { MantineProvider } from "@mantine/core";
 import { TFormData } from "./types";
 import { EMPTYSTRING, INITIALFORMDATA, LOCALSTORAGE } from "./constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import SignupPage from "./Signup-Page";
+import SignupPage from "./Signup/Signup-Page";
 import HomePage from "./Homepage";
 
 const getFormData = (): TFormData => {

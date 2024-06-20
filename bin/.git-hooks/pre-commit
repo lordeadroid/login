@@ -12,8 +12,8 @@ check() {
   fi
 }
 
-# git push
-# check "updates avaiable"
+git push
+check "updates avaiable"
 
 npm run lint
 check "linting errors"

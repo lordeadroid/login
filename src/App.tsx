@@ -6,7 +6,7 @@ import { TFormData } from "./types";
 import { EMPTYSTRING, INITIALFORMDATA, LOCALSTORAGE } from "./constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import SignupPage from "./Signup/Signup-Page";
-import HomePage from "./Homepage";
+import HomePage from "./Homepage/Homepage";
 
 const getFormData = (): TFormData => {
   const localData: string | null = localStorage.getItem(LOCALSTORAGE.propName);

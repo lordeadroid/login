@@ -1,13 +1,16 @@
+import { Box, Flex, Text } from "@mantine/core";
 import { THomePage } from "./types";
 
 const HomePage: THomePage = ({ logout }) => {
   return (
-    <div className="page">
-      <div onClick={logout} className="logout-button">
+    <Flex justify={"center"} align={"center"} h={"100vh"}>
+      <Box onClick={logout} pos={"absolute"} top={0} right={0}>
         Logout
-      </div>
-      <h1>Signed Up Successfully</h1>
-    </div>
+      </Box>
+      <Text size="xl" fz={"h1"}>
+        Signed Up Successfully
+      </Text>
+    </Flex>
   );
 };
 

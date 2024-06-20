@@ -1,3 +1,3 @@
 # Login Page
 
-A simple login page made using React with Mantine.
+A simple login page made with React, Typescript and Mantine.

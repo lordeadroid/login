@@ -16,3 +16,7 @@ export type TSignUpPage = (props: {
 }) => React.JSX.Element;
 
 export type THomePage = (props: { logout: () => void }) => React.JSX.Element;
+
+export type TValidateFormEntry = (value: string) => string | null;
+
+export type TValidatorFn = (value: string) => boolean;

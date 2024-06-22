@@ -4,6 +4,8 @@ export type TFormData = {
   username: string;
   email: string;
   password: string;
+  number: string;
+  nationality: string;
 };
 
 export type THandleSubmit = {

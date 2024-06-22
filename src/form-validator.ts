@@ -1,4 +1,4 @@
-import { FORMERROR } from "./constant";
+import { FORMERROR, NATIONALITY } from "./constant";
 import { TValidateFormEntry, TValidatorFn } from "./types";
 
 const isValidEmail: TValidatorFn = (value) => /^\S+@\S+$/.test(value);
@@ -19,10 +19,18 @@ const validateUsername: TValidateFormEntry = (value) => {
   return isValidUsername(value) ? FORMERROR.username : null;
 };
 
+const isValidNationality: TValidatorFn = (value) =>
+  value === NATIONALITY.INDIAN || value === NATIONALITY.OTHER;
+
+const validateNationality: TValidateFormEntry = (value) => {
+  return isValidNationality(value) ? null : FORMERROR.nationality;
+};
+
 const formValidator = {
   email: validateEmail,
   password: validatePassword,
   username: validateUsername,
+  nationality: validateNationality,
 };
 
 export default formValidator;

@@ -2,7 +2,10 @@ import {
   Box,
   Button,
   Flex,
+  Group,
   PasswordInput,
+  Radio,
+  RadioGroup,
   Text,
   TextInput,
 } from "@mantine/core";
@@ -36,13 +39,28 @@ const SignupPage: TSignUpPage = ({ form, handleSubmit }) => {
               size="xl"
               {...form.getInputProps("email")}
             />
+            <TextInput
+              placeholder="number (optional)"
+              size="xl"
+              {...form.getInputProps("number")}
+            />
             <PasswordInput
               placeholder="password"
               size="xl"
               {...form.getInputProps("password")}
             />
+            <RadioGroup
+              label="Nationality"
+              size="md"
+              {...form.getInputProps("nationality")}
+            >
+              <Group>
+                <Radio value="indian" label="Indian" />
+                <Radio value="other" label="Other" />
+              </Group>
+            </RadioGroup>
           </Flex>
-          <Button type="submit" size="md">
+          <Button type="submit" size="lg">
             Submit
           </Button>
         </form>

@@ -1,58 +1,68 @@
 import { Button, Flex, Text } from "@mantine/core";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, NavigateFunction } from "react-router-dom";
 import useFormStore from "./form-store";
-import { LOCALSTORAGE, PATH } from "./constant";
-import { TReact, TUser, TUserStatus } from "./types";
-
-const getLoginStatus: TUserStatus = () => {
-  const loginStatus: string | null = localStorage.getItem(
-    LOCALSTORAGE.propName
-  );
-
-  if (loginStatus === null) {
-    return { status: false };
-  }
-
-  return { status: true, ...JSON.parse(loginStatus) };
-};
+import { PATH } from "./constant";
+import { TReact, TUser } from "./types";
+import { getLoginStatus } from "./utils";
+import React from "react";
 
 const LogoutButton: TReact = () => {
-  const updateStatus = useFormStore((state) => state.updateStatus);
-  const navigate = useNavigate();
   const logout = useFormStore((state) => state.resetForm);
+  const updateStatus = useFormStore((state) => state.updateStatus);
+  const navigate: NavigateFunction = useNavigate();
 
   const handleLogout = (): void => {
     logout();
     updateStatus();
-    navigate("/");
+    navigate(PATH.home);
   };
 
   return (
-    <Button size="md" onClick={handleLogout}>
+    <Button size="lg" onClick={handleLogout}>
       Logout
     </Button>
+  );
+};
+
+const LoginButton: TReact = () => {
+  const navigate: NavigateFunction = useNavigate();
+  const updateStatus = useFormStore((state) => state.updateStatus);
+
+  const handleLogin = (): void => {
+    updateStatus();
+    navigate(PATH.login);
+  };
+
+  return (
+    <Button size="lg" onClick={handleLogin}>
+      Login
+    </Button>
+  );
+};
+
+const Profile = ({
+  username,
+}: {
+  username: string | undefined;
+}): React.JSX.Element => {
+  return (
+    <Flex gap={"1rem"} align={"center"}>
+      <Text size="1.5rem" fs={"italic"}>
+        Welcome, {username}
+      </Text>
+      <LogoutButton />
+    </Flex>
   );
 };
 
 const UserSection: TReact = () => {
   const userInfo: TUser = getLoginStatus();
 
-  const loginButton: React.JSX.Element = (
-    <Link to={PATH.login} style={{ color: "white", all: "unset" }}>
-      <Button size="md">Login</Button>
-    </Link>
+  return userInfo.status ? (
+    <Profile username={userInfo.username} />
+  ) : (
+    <LoginButton />
   );
-
-  const profile: React.JSX.Element = (
-    <Flex gap={"1rem"} align={"center"}>
-      <Text size="1.5rem" fs={"italic"}>
-        Welcome, {userInfo.username}
-      </Text>
-      <LogoutButton />
-    </Flex>
-  );
-
-  return userInfo.status ? profile : loginButton;
 };
 
 export default UserSection;

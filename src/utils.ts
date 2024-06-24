@@ -12,3 +12,10 @@ export const getLoginStatus: TUserStatus = () => {
 
   return { status: true, ...JSON.parse(loginStatus) };
 };
+
+export const updateLoginInfo = (username: string) => {
+  localStorage.setItem(
+    LOCALSTORAGE.propName,
+    JSON.stringify({ username, status: true })
+  );
+};

@@ -6,7 +6,7 @@ import NavigationBar from "./Navigation-Bar/Navigation-Bar";
 import Page from "./Page";
 import SignupPage from "./Signup/Signup-Page";
 import { TReact } from "./types";
-import Login from "./Login/Login";
+import Login from "./Login/Login-Page";
 
 const Layout: TReact = () => {
   return (

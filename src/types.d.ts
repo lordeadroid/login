@@ -1,9 +1,14 @@
-export type TFormData = {
+export type TSignupFormData = {
   username: string;
   email: string;
   password: string;
   number: string;
   nationality: string;
+};
+
+export type TLoginFormData = {
+  username: string;
+  password: string;
 };
 
 export type THandleSubmit = (values: TFormData) => void;

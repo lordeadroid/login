@@ -1,17 +1,29 @@
 import { Button, Flex, PasswordInput, Text, TextInput } from "@mantine/core";
-import { TFormData, TReact } from "../types";
-import { INITIALFORMDATA, PATH } from "../constant";
-import formValidator from "../form-validator";
+import { TLoginFormData, TReact } from "../types";
+import { INITIALLOGINFORM, PATH } from "../constant";
+import { loginFormValidator } from "../form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import styles from "./Login.module.css";
-import { Link } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+import useFormStore from "../form-store";
+import { updateLoginInfo } from "../utils";
 
 const Login: TReact = () => {
-  const handleSubmit = () => {};
-  const form: UseFormReturnType<TFormData> = useForm({
+  const navigate: NavigateFunction = useNavigate();
+  const updateStatus = useFormStore((state) => state.updateStatus);
+
+  const handleSubmit = (values: TLoginFormData) => {
+    const { username } = values;
+
+    updateLoginInfo(username);
+    updateStatus();
+    navigate(PATH.home);
+  };
+
+  const form: UseFormReturnType<TLoginFormData> = useForm({
     mode: "uncontrolled",
-    initialValues: INITIALFORMDATA,
-    validate: formValidator,
+    initialValues: INITIALLOGINFORM,
+    validate: loginFormValidator,
   });
 
   return (

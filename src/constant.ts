@@ -1,6 +1,11 @@
 export const EMPTYSTRING = "";
 
-export const INITIALFORMDATA = {
+export const INITIALLOGINFORM = {
+  username: EMPTYSTRING,
+  password: EMPTYSTRING,
+};
+
+export const INITIALSIGNUPFORM = {
   username: EMPTYSTRING,
   email: EMPTYSTRING,
   password: EMPTYSTRING,
@@ -9,7 +14,7 @@ export const INITIALFORMDATA = {
 };
 
 export const LOCALSTORAGE = {
-  propName: "formData",
+  propName: "loginInfo",
 };
 
 export const FORMERROR = {

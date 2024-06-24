@@ -26,11 +26,16 @@ const validateNationality: TValidateFormEntry = (value) => {
   return isValidNationality(value) ? null : FORMERROR.nationality;
 };
 
-const formValidator = {
+const signupFormValidator = {
   email: validateEmail,
   password: validatePassword,
   username: validateUsername,
   nationality: validateNationality,
 };
 
-export default formValidator;
+const loginFormValidator = {
+  username: validateUsername,
+  password: validatePassword,
+};
+
+export { signupFormValidator, loginFormValidator };

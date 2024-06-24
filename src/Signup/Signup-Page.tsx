@@ -8,27 +8,30 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { TFormData, THandleSubmit, TReact } from "../types";
+import { THandleSubmit, TReact, TSignupFormData } from "../types";
 import styles from "./Signup.module.css";
-import { INITIALFORMDATA, LOCALSTORAGE, PATH } from "../constant";
+import { INITIALSIGNUPFORM, PATH } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import formValidator from "../form-validator";
 import useFormStore from "../form-store";
 import { Link, useNavigate } from "react-router-dom";
+import { signupFormValidator } from "../form-validator";
+import { updateLoginInfo } from "../utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
   const updateStatus = useFormStore((state) => state.updateStatus);
   const updateFormData = useFormStore((state) => state.updateForm);
 
-  const form: UseFormReturnType<TFormData> = useForm({
+  const form: UseFormReturnType<TSignupFormData> = useForm({
     mode: "uncontrolled",
-    initialValues: INITIALFORMDATA,
-    validate: formValidator,
+    initialValues: INITIALSIGNUPFORM,
+    validate: signupFormValidator,
   });
 
   const handleSubmit: THandleSubmit = (values) => {
-    localStorage.setItem(LOCALSTORAGE.propName, JSON.stringify(values));
+    const { username } = values;
+
+    updateLoginInfo(username);
     updateFormData(values);
     updateStatus();
     navigate("/");

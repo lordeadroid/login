@@ -4,8 +4,10 @@ import { MantineProvider } from "@mantine/core";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import NavigationBar from "./Navigation-Bar/Navigation-Bar";
 import Page from "./Page";
+import SignupPage from "./Signup/Signup-Page";
+import { TReact } from "./types";
 
-const Layout = (): React.JSX.Element => {
+const Layout: TReact = () => {
   return (
     <>
       <NavigationBar />
@@ -18,7 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [{ path: "/", element: <Page /> }],
+    children: [
+      { path: "/", element: <Page /> },
+      { path: "/signup", element: <SignupPage /> },
+    ],
   },
 ]);
 

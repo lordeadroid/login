@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { TFormData, THandleSubmit, TReact } from "../types";
 import styles from "./Signup.module.css";
-import { INITIALFORMDATA, LOCALSTORAGE } from "../constant";
+import { INITIALFORMDATA, LOCALSTORAGE, PATH } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import formValidator from "../form-validator";
 import useFormStore from "../form-store";
@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
+  const updateStatus = useFormStore((state) => state.updateStatus);
   const updateFormData = useFormStore((state) => state.updateForm);
 
   const form: UseFormReturnType<TFormData> = useForm({
@@ -29,11 +30,12 @@ const SignupPage: TReact = () => {
   const handleSubmit: THandleSubmit = (values) => {
     localStorage.setItem(LOCALSTORAGE.propName, JSON.stringify(values));
     updateFormData(values);
+    updateStatus();
     navigate("/");
   };
 
   return (
-    <Flex align={"center"} justify={"center"} direction={"column"} p={"15rem"}>
+    <Flex align={"center"} justify={"center"} direction={"column"} p={"10rem"}>
       <form onSubmit={form.onSubmit(handleSubmit)} className={styles.form}>
         <Flex direction={"column"} gap={"0.75rem"}>
           <TextInput
@@ -73,7 +75,7 @@ const SignupPage: TReact = () => {
       </form>
       <Flex gap={"0.5rem"} p={"1rem"}>
         <Text>Already have an account?</Text>
-        <Link to="/login">Login</Link>
+        <Link to={PATH.login}>Login</Link>
       </Flex>
     </Flex>
   );

@@ -23,3 +23,9 @@ export const NATIONALITY = {
   INDIAN: "indian",
   OTHER: "other",
 };
+
+export const PATH = {
+  home: "/",
+  login: "/login",
+  signup: "/signup",
+};

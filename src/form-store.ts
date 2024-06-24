@@ -1,23 +1,20 @@
 import { create } from "zustand";
-import { INITIALFORMDATA, LOCALSTORAGE } from "./constant";
+import { INITIALFORMDATA } from "./constant";
 import { TFormStore } from "./types";
 
 const useFormStore = create<TFormStore>()((set) => ({
   formData: INITIALFORMDATA,
+  status: false,
+  updateStatus: () => set((state) => ({ status: !state.status })),
   updateForm: (values) =>
     set(() => {
       return { formData: values };
     }),
-
-  resetForm: () => {
+  resetForm: () =>
     set(() => {
-      localStorage.setItem(
-        LOCALSTORAGE.propName,
-        JSON.stringify(INITIALFORMDATA)
-      );
+      localStorage.clear();
       return { formData: INITIALFORMDATA };
-    });
-  },
+    }),
 }));
 
 export default useFormStore;

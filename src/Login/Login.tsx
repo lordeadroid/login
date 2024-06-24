@@ -1,6 +1,6 @@
 import { Button, Flex, PasswordInput, Text, TextInput } from "@mantine/core";
 import { TFormData, TReact } from "../types";
-import { INITIALFORMDATA } from "../constant";
+import { INITIALFORMDATA, PATH } from "../constant";
 import formValidator from "../form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import styles from "./Login.module.css";
@@ -35,7 +35,7 @@ const Login: TReact = () => {
       </form>
       <Flex gap={"1rem"} p={"1rem"}>
         <Text>Don't have an account?</Text>
-        <Link to="/signup">Signup</Link>
+        <Link to={PATH.signup}>Signup</Link>
       </Flex>
     </Flex>
   );

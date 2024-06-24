@@ -1,38 +1,24 @@
-import { Button, Flex, Text } from "@mantine/core";
-import { TReact } from "../types";
+import { Flex, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
-
-const getLoginStatus = (): boolean => {
-  const loginStatus: string | null = localStorage.getItem("loginStatus");
-  if (loginStatus === null) {
-    return false;
-  }
-
-  return JSON.parse(loginStatus);
-};
-
-const Profile: TReact = () => {
-  const isLoggedIn: boolean = getLoginStatus();
-
-  const loginButton: React.JSX.Element = (
-    <Link to="/login" style={{ color: "white", all: "unset" }}>
-      <Button size="lg">Login</Button>
-    </Link>
-  );
-
-  return isLoggedIn ? <Text>Rishabh</Text> : loginButton;
-};
+import useFormStore from "../form-store";
+import { useEffect } from "react";
+import UserSection from "../User-Section";
+import { PATH } from "../constant";
 
 const NavigationBar = () => {
+  const status = useFormStore((state) => state.status);
+
+  useEffect(() => {}, [status]);
+
   return (
     <Flex h={"5rem"} p={"1rem"} justify={"space-between"} align={"center"}>
-      <Link to={"/"} style={{ all: "unset" }}>
+      <Link to={PATH.home} style={{ all: "unset" }}>
         <Text size="4rem" fw={900}>
           antstack
         </Text>
       </Link>
       <Text>
-        <Profile />
+        <UserSection />
       </Text>
     </Flex>
   );

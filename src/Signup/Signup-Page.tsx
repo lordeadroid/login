@@ -5,6 +5,7 @@ import {
   PasswordInput,
   Radio,
   RadioGroup,
+  Text,
   TextInput,
 } from "@mantine/core";
 import { TFormData, THandleSubmit, TReact } from "../types";
@@ -13,18 +14,10 @@ import { INITIALFORMDATA, LOCALSTORAGE } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import formValidator from "../form-validator";
 import useFormStore from "../form-store";
-
-// const getFormData = (): TFormData => {
-//   const localData: string | null = localStorage.getItem(LOCALSTORAGE.propName);
-
-//   if (localData === null) {
-//     return INITIALFORMDATA;
-//   }
-
-//   return JSON.parse(localData);
-// };
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupPage: TReact = () => {
+  const navigate = useNavigate();
   const updateFormData = useFormStore((state) => state.updateForm);
 
   const form: UseFormReturnType<TFormData> = useForm({
@@ -36,6 +29,7 @@ const SignupPage: TReact = () => {
   const handleSubmit: THandleSubmit = (values) => {
     localStorage.setItem(LOCALSTORAGE.propName, JSON.stringify(values));
     updateFormData(values);
+    navigate("/");
   };
 
   return (
@@ -77,6 +71,10 @@ const SignupPage: TReact = () => {
           Submit
         </Button>
       </form>
+      <Flex gap={"0.5rem"} p={"1rem"}>
+        <Text>Already have an account?</Text>
+        <Link to="/login">Login</Link>
+      </Flex>
     </Flex>
   );
 };

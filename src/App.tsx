@@ -6,6 +6,7 @@ import NavigationBar from "./Navigation-Bar/Navigation-Bar";
 import Page from "./Page";
 import SignupPage from "./Signup/Signup-Page";
 import { TReact } from "./types";
+import Login from "./Login/Login";
 
 const Layout: TReact = () => {
   return (
@@ -23,11 +24,12 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Page /> },
       { path: "/signup", element: <SignupPage /> },
+      { path: "/login", element: <Login /> },
     ],
   },
 ]);
 
-const App = (): React.JSX.Element => {
+const App: TReact = () => {
   return (
     <MantineProvider>
       <RouterProvider router={router} />

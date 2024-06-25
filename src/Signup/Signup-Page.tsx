@@ -15,12 +15,12 @@ import { UseFormReturnType, useForm } from "@mantine/form";
 import useFormStore from "../form-store";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../form-validator";
-import { updateLoginInfo } from "../utils";
+import { hashString, updateLoginInfo } from "../utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
   const refreshPage = useFormStore((state) => state.updateStatus);
-  const updateFormData = useFormStore((state) => state.updateForm);
+  const updateForm = useFormStore((state) => state.updateForm);
 
   const form: UseFormReturnType<TSignupFormData> = useForm({
     mode: "uncontrolled",
@@ -28,11 +28,12 @@ const SignupPage: TReact = () => {
     validate: signupFormValidator,
   });
 
-  const handleSubmit: THandleSubmit = (values) => {
-    const { username } = values;
+  const handleSubmit: THandleSubmit = async (values) => {
+    const { username, password } = values;
+    values.password = await hashString(password);
 
     updateLoginInfo(username); // updating in localStorage
-    updateFormData(values); // updating in formStore
+    updateForm(values); // updating in formStore
     refreshPage(); // updating state for rerendering
     navigate(PATH.home);
   };

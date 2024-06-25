@@ -17,9 +17,7 @@ const NavigationBar = () => {
           antstack
         </Text>
       </Link>
-      <Text>
-        <UserSection />
-      </Text>
+      <UserSection />
     </Flex>
   );
 };

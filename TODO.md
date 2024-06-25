@@ -23,7 +23,7 @@
 
 - Styling and Components:
 
-  1. Utilize a CSS framework such as Mantine for styling and components.
+  1. Utilize a CSS framework such as Mantine for styling and components. [x]
   2. Define styles in a theme file to maintain consistency across the application.
 
 ---

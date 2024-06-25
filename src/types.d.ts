@@ -20,10 +20,10 @@ export type TValidateFormEntry = (value: string) => string | null;
 export type TValidatorFn = (value: string) => boolean;
 
 export type TFormStore = {
-  formData: TFormData;
+  formData: TSignupFormData;
   status: boolean;
   updateStatus: () => void;
-  updateForm: (newFormData: TFormData) => void;
+  updateForm: (values: TSignupFormData) => void;
   resetForm: () => void;
 };
 

@@ -6,10 +6,7 @@ const useFormStore = create<TFormStore>()((set) => ({
   formData: INITIALSIGNUPFORM,
   status: false,
   updateStatus: () => set((state) => ({ status: !state.status })),
-  updateForm: (values) =>
-    set(() => {
-      return { formData: values };
-    }),
+  updateForm: (values) => set({ formData: values }),
   resetForm: () =>
     set(() => {
       localStorage.removeItem(LOCALSTORAGE.propName);

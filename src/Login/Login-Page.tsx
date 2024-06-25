@@ -8,15 +8,15 @@ import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import useFormStore from "../form-store";
 import { updateLoginInfo } from "../utils";
 
-const Login: TReact = () => {
+const LoginPage: TReact = () => {
   const navigate: NavigateFunction = useNavigate();
-  const updateStatus = useFormStore((state) => state.updateStatus);
+  const refreshPage = useFormStore((state) => state.updateStatus);
 
   const handleSubmit = (values: TLoginFormData) => {
     const { username } = values;
 
-    updateLoginInfo(username);
-    updateStatus();
+    updateLoginInfo(username); // updating in localStorage
+    refreshPage(); // updating state for rerendering
     navigate(PATH.home);
   };
 
@@ -53,4 +53,4 @@ const Login: TReact = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

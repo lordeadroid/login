@@ -19,7 +19,7 @@ import { updateLoginInfo } from "../utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
-  const updateStatus = useFormStore((state) => state.updateStatus);
+  const refreshPage = useFormStore((state) => state.updateStatus);
   const updateFormData = useFormStore((state) => state.updateForm);
 
   const form: UseFormReturnType<TSignupFormData> = useForm({
@@ -31,10 +31,10 @@ const SignupPage: TReact = () => {
   const handleSubmit: THandleSubmit = (values) => {
     const { username } = values;
 
-    updateLoginInfo(username);
-    updateFormData(values);
-    updateStatus();
-    navigate("/");
+    updateLoginInfo(username); // updating in localStorage
+    updateFormData(values); // updating in formStore
+    refreshPage(); // updating state for rerendering
+    navigate(PATH.home);
   };
 
   return (

@@ -35,3 +35,14 @@ export type TUser = {
 };
 
 export type TUserStatus = () => TUser;
+
+export type TDatabaseStore = {
+  entries: TSignupFormData[];
+  addEntry: (newEntry: TSignupFormData) => void;
+};
+
+export type TLoginStore = {
+  username: string;
+  updateStore: (username: string) => void;
+  resetStore: () => void;
+};

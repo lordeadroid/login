@@ -34,3 +34,8 @@ export const PATH = {
   login: "/login",
   signup: "/signup",
 };
+
+export const STORE = {
+  database: "databaseStore",
+  login: "loginStore",
+};

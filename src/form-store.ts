@@ -1,6 +1,11 @@
 import { create } from "zustand";
-import { INITIALSIGNUPFORM, LOCALSTORAGE } from "./constant";
-import { TFormStore } from "./types";
+import {
+  EMPTYSTRING,
+  INITIALSIGNUPFORM,
+  LOCALSTORAGE,
+  STORE,
+} from "./constant";
+import { TDatabaseStore, TFormStore, TLoginStore } from "./types";
 import { persist } from "zustand/middleware";
 
 const useFormStore = create<TFormStore>()(
@@ -17,6 +22,28 @@ const useFormStore = create<TFormStore>()(
         }),
     }),
     { name: "formStore" }
+  )
+);
+
+export const useDatabaseStore = create<TDatabaseStore>()(
+  persist(
+    (set) => ({
+      entries: [],
+      addEntry: (newEntry) =>
+        set((state) => ({ entries: [...state.entries, newEntry] })),
+    }),
+    { name: STORE.database }
+  )
+);
+
+export const useLoginStore = create<TLoginStore>()(
+  persist(
+    (set) => ({
+      username: EMPTYSTRING,
+      updateStore: (username) => set({ username }),
+      resetStore: () => set({ username: EMPTYSTRING }),
+    }),
+    { name: STORE.login }
   )
 );
 

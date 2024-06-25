@@ -28,11 +28,20 @@
 
 ---
 
+# Todo
+
+- Create login and database store [x]
+- Access login data from store instead from localstorage
+
+---
+
 # Questions
 
 - Typescript
 
   1. Adding explictly types for variables.
   2. For some varibles from lib, types are not available.
+
+- Frontend Testing
 
 ---

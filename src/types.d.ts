@@ -43,6 +43,6 @@ export type TDatabaseStore = {
 
 export type TLoginStore = {
   username: string;
-  updateStore: (username: string) => void;
-  resetStore: () => void;
+  updateUsername: (username: string) => void;
+  resetUsername: () => void;
 };

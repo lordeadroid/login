@@ -40,8 +40,8 @@ export const useLoginStore = create<TLoginStore>()(
   persist(
     (set) => ({
       username: EMPTYSTRING,
-      updateStore: (username) => set({ username }),
-      resetStore: () => set({ username: EMPTYSTRING }),
+      updateUsername: (username) => set({ username }),
+      resetUsername: () => set({ username: EMPTYSTRING }),
     }),
     { name: STORE.login }
   )

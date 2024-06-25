@@ -12,7 +12,7 @@ import { THandleSubmit, TReact, TSignupFormData } from "../types";
 import styles from "./Signup.module.css";
 import { INITIALSIGNUPFORM, PATH } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import useFormStore from "../form-store";
+import useFormStore, { useDatabaseStore, useLoginStore } from "../form-store";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../form-validator";
 import { hashString, updateLoginInfo } from "../utils";
@@ -21,6 +21,8 @@ const SignupPage: TReact = () => {
   const navigate = useNavigate();
   const refreshPage = useFormStore((state) => state.updateStatus);
   const updateForm = useFormStore((state) => state.updateForm);
+  const addEntry = useDatabaseStore((state) => state.addEntry);
+  const updateUsername = useLoginStore((state) => state.updateUsername);
 
   const form: UseFormReturnType<TSignupFormData> = useForm({
     mode: "uncontrolled",
@@ -32,7 +34,9 @@ const SignupPage: TReact = () => {
     const { username, password } = values;
     values.password = await hashString(password);
 
-    updateLoginInfo(username); // updating in localStorage
+    updateUsername(username);
+    updateLoginInfo(username);
+    addEntry(values); // updating in localStorage
     updateForm(values); // updating in formStore
     refreshPage(); // updating state for rerendering
     navigate(PATH.home);

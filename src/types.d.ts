@@ -11,7 +11,7 @@ export type TLoginFormData = {
   password: string;
 };
 
-export type THandleSubmit = (values: TFormData) => void;
+export type THandleSubmit = (values: TSignupFormData) => void;
 
 export type THomePage = (props: { logout: () => void }) => React.JSX.Element;
 
@@ -32,7 +32,6 @@ export type TReact = () => React.JSX.Element;
 export type TUser = {
   status: boolean;
   username?: string;
-  email?: string;
 };
 
 export type TUserStatus = () => TUser;

@@ -12,15 +12,13 @@ import { THandleSubmit, TReact, TSignupFormData } from "../types";
 import styles from "./Signup.module.css";
 import { INITIALSIGNUPFORM, PATH } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import useFormStore, { useDatabaseStore, useLoginStore } from "../form-store";
+import { useDatabaseStore, useLoginStore } from "../use-store";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../form-validator";
-import { hashString, updateLoginInfo } from "../utils";
+import { hashString } from "../utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
-  const refreshPage = useFormStore((state) => state.updateStatus);
-  const updateForm = useFormStore((state) => state.updateForm);
   const addEntry = useDatabaseStore((state) => state.addEntry);
   const updateUsername = useLoginStore((state) => state.updateUsername);
 
@@ -34,11 +32,8 @@ const SignupPage: TReact = () => {
     const { username, password } = values;
     values.password = await hashString(password);
 
-    updateUsername(username);
-    updateLoginInfo(username);
-    addEntry(values); // updating in localStorage
-    updateForm(values); // updating in formStore
-    refreshPage(); // updating state for rerendering
+    updateUsername(username); // add user in login-store
+    addEntry(values); // add user in db-store
     navigate(PATH.home);
   };
 

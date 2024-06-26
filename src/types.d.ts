@@ -19,22 +19,7 @@ export type TValidateFormEntry = (value: string) => string | null;
 
 export type TValidatorFn = (value: string) => boolean;
 
-export type TFormStore = {
-  formData: TSignupFormData;
-  status: boolean;
-  updateStatus: () => void;
-  updateForm: (values: TSignupFormData) => void;
-  resetForm: () => void;
-};
-
 export type TReact = () => React.JSX.Element;
-
-export type TUser = {
-  status: boolean;
-  username?: string;
-};
-
-export type TUserStatus = () => TUser;
 
 export type TDatabaseStore = {
   entries: TSignupFormData[];

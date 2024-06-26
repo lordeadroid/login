@@ -4,19 +4,17 @@ import { INITIALLOGINFORM, PATH } from "../constant";
 import { loginFormValidator } from "../form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import styles from "./Login.module.css";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
-import useFormStore from "../form-store";
-import { updateLoginInfo } from "../utils";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginStore } from "../use-store";
 
 const LoginPage: TReact = () => {
-  const navigate: NavigateFunction = useNavigate();
-  const refreshPage = useFormStore((state) => state.updateStatus);
+  const navigate = useNavigate();
+  const updateUsername = useLoginStore((state) => state.updateUsername);
 
   const handleSubmit = (values: TLoginFormData) => {
     const { username } = values;
 
-    updateLoginInfo(username); // updating in localStorage
-    refreshPage(); // updating state for rerendering
+    updateUsername(username); // add user in login-store
     navigate(PATH.home);
   };
 

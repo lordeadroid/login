@@ -1,19 +1,15 @@
 import { Button, Flex, Text } from "@mantine/core";
 import { useNavigate, NavigateFunction } from "react-router-dom";
-import useFormStore from "./form-store";
-import { PATH } from "./constant";
-import { TReact, TUser } from "./types";
-import { getLoginStatus } from "./utils";
-import React from "react";
+import { useLoginStore } from "./use-store";
+import { EMPTYSTRING, PATH } from "./constant";
+import { TReact } from "./types";
 
 const LogoutButton: TReact = () => {
-  const logout = useFormStore((state) => state.resetForm);
-  const updateStatus = useFormStore((state) => state.updateStatus);
+  const resetUsername = useLoginStore((state) => state.resetUsername);
   const navigate: NavigateFunction = useNavigate();
 
   const handleLogout = (): void => {
-    logout();
-    updateStatus();
+    resetUsername();
     navigate(PATH.home);
   };
 
@@ -26,10 +22,8 @@ const LogoutButton: TReact = () => {
 
 const LoginButton: TReact = () => {
   const navigate: NavigateFunction = useNavigate();
-  const updateStatus = useFormStore((state) => state.updateStatus);
 
   const handleLogin = (): void => {
-    updateStatus();
     navigate(PATH.login);
   };
 
@@ -40,11 +34,7 @@ const LoginButton: TReact = () => {
   );
 };
 
-const Profile = ({
-  username,
-}: {
-  username: string | undefined;
-}): React.JSX.Element => {
+const Profile = ({ username }: { username: string }): React.JSX.Element => {
   return (
     <Flex gap={"1rem"} align={"center"}>
       <Text size="1.5rem" fs={"italic"}>
@@ -56,10 +46,10 @@ const Profile = ({
 };
 
 const UserSection: TReact = () => {
-  const userInfo: TUser = getLoginStatus();
+  const username = useLoginStore((state) => state.username);
 
-  return userInfo.status ? (
-    <Profile username={userInfo.username} />
+  return username !== EMPTYSTRING ? (
+    <Profile username={username} />
   ) : (
     <LoginButton />
   );

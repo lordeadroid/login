@@ -1,17 +1,27 @@
 import { Button, Flex, PasswordInput, Text, TextInput } from "@mantine/core";
 import { TLoginFormData, TReact } from "../types";
-import { ERROR, INITIALLOGINFORM, PATH } from "../constant";
+import { EMPTYSTRING, ERROR, INITIALLOGINFORM, PATH } from "../constant";
 import { loginFormValidator } from "../form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDatabaseStore, useLoginStore } from "../use-store";
 import { hashString, isVerifiedUser, userExist } from "../utils";
+import { useEffect } from "react";
 
 const LoginPage: TReact = () => {
   const navigate = useNavigate();
+
+  const username = useLoginStore((state) => state.username);
   const updateUsername = useLoginStore((state) => state.updateUsername);
+
   const entries = useDatabaseStore((state) => state.entries);
+
+  useEffect(() => {
+    if (username !== EMPTYSTRING) {
+      navigate(PATH.home);
+    }
+  });
 
   const handleSubmit = async (values: TLoginFormData) => {
     const { username, password } = values;
@@ -21,7 +31,7 @@ const LoginPage: TReact = () => {
       return;
     }
 
-    const hashedPassword = await hashString(password);
+    const hashedPassword: string = await hashString(password);
 
     if (!isVerifiedUser(entries, username, hashedPassword)) {
       alert(ERROR.login.password);

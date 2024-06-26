@@ -10,18 +10,28 @@ import {
 } from "@mantine/core";
 import { THandleSubmit, TReact, TSignupFormData } from "../types";
 import styles from "./Signup.module.css";
-import { ERROR, INITIALSIGNUPFORM, PATH } from "../constant";
+import { EMPTYSTRING, ERROR, INITIALSIGNUPFORM, PATH } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import { useDatabaseStore, useLoginStore } from "../use-store";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../form-validator";
 import { hashString, userExist } from "../utils";
+import { useEffect } from "react";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
-  const addEntry = useDatabaseStore((state) => state.addEntry);
+
+  const username = useLoginStore((state) => state.username);
   const updateUsername = useLoginStore((state) => state.updateUsername);
+
   const entries = useDatabaseStore((state) => state.entries);
+  const addEntry = useDatabaseStore((state) => state.addEntry);
+
+  useEffect(() => {
+    if (username !== EMPTYSTRING) {
+      navigate(PATH.home);
+    }
+  });
 
   const form: UseFormReturnType<TSignupFormData> = useForm({
     mode: "uncontrolled",

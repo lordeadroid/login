@@ -8,7 +8,7 @@ export const updateLoginInfo = (username: string) => {
   );
 };
 
-export const hashString = async (input: string) => {
+export const hashString = async (input: string): Promise<string> => {
   const encoder = new TextEncoder();
   const data = encoder.encode(input);
   const hash = await crypto.subtle.digest("SHA-512", data);

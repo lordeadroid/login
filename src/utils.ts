@@ -1,5 +1,5 @@
 import { LOCALSTORAGE } from "./constant";
-import { TFindByUsername } from "./types";
+import { TSignupFormData, TUserExist, TVerifiedUser } from "./types";
 
 export const updateLoginInfo = (username: string) => {
   localStorage.setItem(
@@ -18,6 +18,14 @@ export const hashString = async (input: string) => {
     .join("");
 };
 
-export const findByUsername: TFindByUsername = (db, username) => {
+export const userExist: TUserExist = (db, username) => {
   return db.some((entry) => entry.username === username);
+};
+
+export const isVerifiedUser: TVerifiedUser = (db, username, password) => {
+  const user = db.find(
+    (entry) => entry.username === username
+  ) as TSignupFormData;
+
+  return user.password === password;
 };

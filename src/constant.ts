@@ -42,5 +42,8 @@ export const STORE = {
 
 export const ERROR = {
   signup: "Username is already taken",
-  login: "User does not exists",
+  login: {
+    username: "User does not exists",
+    password: "Wrong Password",
+  },
 };

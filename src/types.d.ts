@@ -32,7 +32,10 @@ export type TLoginStore = {
   resetUsername: () => void;
 };
 
-export type TFindByUsername = (
+export type TUserExist = (db: TSignupFormData[], username: string) => boolean;
+
+export type TVerifiedUser = (
   db: TSignupFormData[],
-  username: string
+  username: string,
+  password: string
 ) => boolean;

@@ -15,7 +15,7 @@ import { UseFormReturnType, useForm } from "@mantine/form";
 import { useDatabaseStore, useLoginStore } from "../use-store";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../form-validator";
-import { findByUsername, hashString } from "../utils";
+import { hashString, userExist } from "../utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
@@ -31,9 +31,8 @@ const SignupPage: TReact = () => {
 
   const handleSubmit: THandleSubmit = async (values) => {
     const { username, password } = values;
-    const isUserExist = findByUsername(entries, username);
 
-    if (isUserExist) {
+    if (userExist(entries, username)) {
       alert(ERROR.signup);
       return;
     }

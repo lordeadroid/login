@@ -13,8 +13,6 @@ export type TLoginFormData = {
 
 export type THandleSubmit = (values: TSignupFormData) => void;
 
-export type THomePage = (props: { logout: () => void }) => React.JSX.Element;
-
 export type TValidateFormEntry = (value: string) => string | null;
 
 export type TValidatorFn = (value: string) => boolean;

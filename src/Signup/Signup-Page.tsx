@@ -10,17 +10,18 @@ import {
 } from "@mantine/core";
 import { THandleSubmit, TReact, TSignupFormData } from "../types";
 import styles from "./Signup.module.css";
-import { INITIALSIGNUPFORM, PATH } from "../constant";
+import { ERROR, INITIALSIGNUPFORM, PATH } from "../constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import { useDatabaseStore, useLoginStore } from "../use-store";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../form-validator";
-import { hashString } from "../utils";
+import { findByUsername, hashString } from "../utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
   const addEntry = useDatabaseStore((state) => state.addEntry);
   const updateUsername = useLoginStore((state) => state.updateUsername);
+  const entries = useDatabaseStore((state) => state.entries);
 
   const form: UseFormReturnType<TSignupFormData> = useForm({
     mode: "uncontrolled",
@@ -30,6 +31,13 @@ const SignupPage: TReact = () => {
 
   const handleSubmit: THandleSubmit = async (values) => {
     const { username, password } = values;
+    const isUserExist = findByUsername(entries, username);
+
+    if (isUserExist) {
+      alert(ERROR.signup);
+      return;
+    }
+
     values.password = await hashString(password);
 
     updateUsername(username); // add user in login-store

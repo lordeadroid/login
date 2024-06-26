@@ -39,3 +39,8 @@ export const STORE = {
   database: "databaseStore",
   login: "loginStore",
 };
+
+export const ERROR = {
+  signup: "Username is already taken",
+  login: "User does not exists",
+};

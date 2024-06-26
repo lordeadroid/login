@@ -1,17 +1,5 @@
 import { LOCALSTORAGE } from "./constant";
-import { TUserStatus } from "./types";
-
-export const getLoginStatus: TUserStatus = () => {
-  const loginStatus: string | null = localStorage.getItem(
-    LOCALSTORAGE.propName
-  );
-
-  if (loginStatus === null) {
-    return { status: false };
-  }
-
-  return { status: true, ...JSON.parse(loginStatus) };
-};
+import { TFindByUsername } from "./types";
 
 export const updateLoginInfo = (username: string) => {
   localStorage.setItem(
@@ -28,4 +16,8 @@ export const hashString = async (input: string) => {
   return Array.from(new Uint8Array(hash))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
+};
+
+export const findByUsername: TFindByUsername = (db, username) => {
+  return db.some((entry) => entry.username === username);
 };

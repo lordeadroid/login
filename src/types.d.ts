@@ -31,3 +31,8 @@ export type TLoginStore = {
   updateUsername: (username: string) => void;
   resetUsername: () => void;
 };
+
+export type TFindByUsername = (
+  db: TSignupFormData[],
+  username: string
+) => boolean;

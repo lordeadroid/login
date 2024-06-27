@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { EMPTYSTRING, STORE } from "./utils/constant";
-import { TDatabaseStore, TLoginStore } from "./types";
+import { EMPTYSTRING, STORE } from "./constant";
+import { TDatabaseStore, TLoginStore } from "../types";
 import { persist } from "zustand/middleware";
 
 export const useDatabaseStore = create<TDatabaseStore>()(

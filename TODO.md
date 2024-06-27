@@ -31,7 +31,8 @@
 # Todo
 
 - create card from fetched data [x]
-- filter data from tags
+- changed login and logout page
+- skeleton loading page on homepage and product page
 
 ---
 

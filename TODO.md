@@ -30,8 +30,8 @@
 
 # Todo
 
-- Create login and database store [x]
-- Access login data from store instead from localstorage
+- create card from fetched data [x]
+- filter data from tags
 
 ---
 

@@ -37,3 +37,12 @@ export type TVerifiedUser = (
   username: string,
   password: string
 ) => boolean;
+
+export type TProduct = {
+  id: number;
+  title: string;
+  price: number;
+  rating: number;
+  tags: string[];
+  thumbnail: string;
+};

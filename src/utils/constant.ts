@@ -5,6 +5,11 @@ export const INITIALLOGINFORM = {
   password: EMPTYSTRING,
 };
 
+export const MinInputLength = {
+  username: 3,
+  password: 3,
+};
+
 export const INITIALSIGNUPFORM = {
   username: EMPTYSTRING,
   email: EMPTYSTRING,
@@ -46,4 +51,10 @@ export const ERROR = {
     username: "User does not exists",
     password: "Wrong Password",
   },
+};
+
+export const RATING = {
+  good: "green",
+  okay: "yellow",
+  poor: "red",
 };

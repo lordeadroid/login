@@ -1,4 +1,4 @@
-import { FORMERROR, NATIONALITY } from "./constant";
+import { FORMERROR, MinInputLength, NATIONALITY } from "./constant";
 import { TValidateFormEntry, TValidatorFn } from "../types";
 
 const isValidEmail: TValidatorFn = (value) => /^\S+@\S+$/.test(value);
@@ -7,13 +7,15 @@ const validateEmail: TValidateFormEntry = (value) => {
   return isValidEmail(value) ? null : FORMERROR.email;
 };
 
-const isValidPassword: TValidatorFn = (value) => value.length < 3;
+const isValidPassword: TValidatorFn = (value) =>
+  value.length < MinInputLength.password;
 
 const validatePassword: TValidateFormEntry = (value) => {
   return isValidPassword(value) ? FORMERROR.password : null;
 };
 
-const isValidUsername: TValidatorFn = (value) => value.length < 3;
+const isValidUsername: TValidatorFn = (value) =>
+  value.length < MinInputLength.username;
 
 const validateUsername: TValidateFormEntry = (value) => {
   return isValidUsername(value) ? FORMERROR.username : null;

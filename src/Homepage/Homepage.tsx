@@ -1,6 +1,6 @@
 import { Badge, Button, Card, Flex, Image, Text } from "@mantine/core";
 import { TProduct } from "../types";
-import { EMPTYSTRING } from "../utils/constant";
+import { EMPTYSTRING, RATING } from "../utils/constant";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./homepage.module.css";
@@ -18,6 +18,12 @@ const HomePage = () => {
       setProductsData(products);
     });
   }, []);
+
+  const ratingColor = (rating: number): string => {
+    if (rating >= 4) return RATING.good;
+    if (rating >= 3) return RATING.okay;
+    return RATING.poor;
+  };
 
   return username === EMPTYSTRING ? (
     <Text>Homepage</Text>
@@ -47,7 +53,7 @@ const HomePage = () => {
                 pos={"-webkit-sticky"}
                 top={"-16rem"}
                 left={"-1rem"}
-                variant={"light"}
+                color={ratingColor(rating)}
               >
                 {rating}
               </Button>

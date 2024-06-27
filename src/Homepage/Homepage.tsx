@@ -52,9 +52,9 @@ const HomePage = () => {
                 {rating}
               </Button>
               <Card.Section className={styles.section}>
-                {tags.map((tag) => {
+                {tags.map((tag, index) => {
                   return (
-                    <Badge size="sm" variant="light">
+                    <Badge size="sm" variant="light" key={index}>
                       {tag}
                     </Badge>
                   );

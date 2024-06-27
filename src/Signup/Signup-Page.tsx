@@ -9,14 +9,14 @@ import {
   TextInput,
 } from "@mantine/core";
 import { THandleSubmit, TReact, TSignupFormData } from "../types";
-import styles from "./Signup.module.css";
-import { EMPTYSTRING, ERROR, INITIALSIGNUPFORM, PATH } from "../constant";
+import styles from "../style.module.css";
+import { EMPTYSTRING, ERROR, INITIALSIGNUPFORM, PATH } from "../utils/constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import { useDatabaseStore, useLoginStore } from "../use-store";
 import { Link, useNavigate } from "react-router-dom";
-import { signupFormValidator } from "../form-validator";
-import { hashString, userExist } from "../utils";
+import { signupFormValidator } from "../utils/form-validator";
 import { useEffect } from "react";
+import { useDatabaseStore, useLoginStore } from "../utils/use-store";
+import { hashString, userExist } from "../utils/utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();

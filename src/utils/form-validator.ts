@@ -1,5 +1,5 @@
 import { FORMERROR, NATIONALITY } from "./constant";
-import { TValidateFormEntry, TValidatorFn } from "./types";
+import { TValidateFormEntry, TValidatorFn } from "../types";
 
 const isValidEmail: TValidatorFn = (value) => /^\S+@\S+$/.test(value);
 

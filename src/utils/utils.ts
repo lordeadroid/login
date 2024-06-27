@@ -1,4 +1,4 @@
-import { LOCALSTORAGE } from "./constant";
+import { LOCALSTORAGE } from "./utils/constant";
 import { TSignupFormData, TUserExist, TVerifiedUser } from "./types";
 
 export const updateLoginInfo = (username: string) => {

@@ -1,13 +1,13 @@
 import { Button, Flex, PasswordInput, Text, TextInput } from "@mantine/core";
 import { TLoginFormData, TReact } from "../types";
-import { EMPTYSTRING, ERROR, INITIALLOGINFORM, PATH } from "../constant";
-import { loginFormValidator } from "../form-validator";
+import { EMPTYSTRING, ERROR, INITIALLOGINFORM, PATH } from "../utils/constant";
+import { loginFormValidator } from "../utils/form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import styles from "./Login.module.css";
+import styles from "../style.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDatabaseStore, useLoginStore } from "../use-store";
-import { hashString, isVerifiedUser, userExist } from "../utils";
 import { useEffect } from "react";
+import { useDatabaseStore, useLoginStore } from "../utils/use-store";
+import { hashString, isVerifiedUser, userExist } from "../utils/utils";
 
 const LoginPage: TReact = () => {
   const navigate = useNavigate();

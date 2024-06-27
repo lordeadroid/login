@@ -1,8 +1,8 @@
 import { Button, Flex, Text } from "@mantine/core";
 import { useNavigate, NavigateFunction } from "react-router-dom";
-import { useLoginStore } from "./use-store";
-import { EMPTYSTRING, PATH } from "./constant";
-import { TReact } from "./types";
+import { EMPTYSTRING, PATH } from "../utils/constant";
+import { TReact } from "../types";
+import { useLoginStore } from "../utils/use-store";
 
 const LogoutButton: TReact = () => {
   const resetUsername = useLoginStore((state) => state.resetUsername);

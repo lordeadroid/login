@@ -1,5 +1,4 @@
 import "@mantine/core/styles.css";
-import "./App.css";
 import { MantineProvider } from "@mantine/core";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import NavigationBar from "./Navigation-Bar/Navigation-Bar";

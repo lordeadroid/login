@@ -1,7 +1,7 @@
 import { Flex, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
-import UserSection from "../User-Section";
-import { PATH } from "../constant";
+import UserSection from "../User-Section/User-Section";
+import { PATH } from "../utils/constant";
 
 const NavigationBar = () => {
   return (

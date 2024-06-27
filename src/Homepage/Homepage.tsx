@@ -1,11 +1,11 @@
 import { Badge, Button, Card, Flex, Image, Text } from "@mantine/core";
 import { TProduct } from "../types";
-import { useLoginStore } from "../use-store";
-import { EMPTYSTRING } from "../constant";
+import { EMPTYSTRING } from "../utils/constant";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./homepage.module.css";
 import { Link } from "react-router-dom";
+import { useLoginStore } from "../utils/use-store";
 
 const HomePage = () => {
   const url = "https://dummyjson.com/products";

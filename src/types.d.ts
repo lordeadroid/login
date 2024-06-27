@@ -46,3 +46,7 @@ export type TProduct = {
   tags: string[];
   thumbnail: string;
 };
+
+export type TProductPage = TProduct & {
+  images: string[];
+};

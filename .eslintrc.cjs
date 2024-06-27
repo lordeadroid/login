@@ -41,7 +41,6 @@ module.exports = {
     "no-undef-init": "warn",
     "no-useless-escape": "warn",
     "no-multiple-empty-lines": "error",
-    "no-magic-numbers": "warn",
     "prefer-const": "warn",
     "react-refresh/only-export-components": [
       "warn",

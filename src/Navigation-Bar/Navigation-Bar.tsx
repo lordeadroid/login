@@ -5,7 +5,16 @@ import { PATH } from "../utils/constant";
 
 const NavigationBar = () => {
   return (
-    <Flex h={"5rem"} p={"1rem"} justify={"space-between"} align={"center"}>
+    <Flex
+      h={"5rem"}
+      p={"1rem"}
+      justify={"space-between"}
+      align={"center"}
+      pos={"sticky"}
+      top={"0rem"}
+      bg={"white"}
+      style={{ zIndex: 1 }}
+    >
       <Link to={PATH.home} style={{ all: "unset" }}>
         <Text size="4rem" fw={900}>
           antstack

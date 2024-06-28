@@ -16,7 +16,8 @@ const Layout: TReact = () => {
       justify={"center"}
       direction={"column"}
       p={"0rem 4rem"}
-      gap={"1.5rem"}
+      gap={"2rem"}
+      bg={"aliceblue"}
     >
       <NavigationBar />
       <Outlet />

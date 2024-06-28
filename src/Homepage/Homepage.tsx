@@ -26,7 +26,9 @@ const HomePage = () => {
   };
 
   return username === EMPTYSTRING ? (
-    <Text>Homepage</Text>
+    <Flex h={"85vh"} justify={"center"} align={"center"}>
+      <Text>Homepage</Text>
+    </Flex>
   ) : (
     <Flex wrap={"wrap"} justify={"space-around"}>
       {productsData.map((product) => {

@@ -55,7 +55,7 @@ const SignupPage: TReact = () => {
   };
 
   return (
-    <Flex w={"80vw"} h={"80vh"} justify={"center"} align={"center"} m={"auto"}>
+    <Flex w={"80vw"} h={"85vh"} justify={"center"} align={"center"} m={"auto"}>
       <Flex
         justify={"center"}
         align={"center"}
@@ -63,7 +63,10 @@ const SignupPage: TReact = () => {
         w={"40vw"}
         p={"4rem"}
         gap={"1rem"}
-        bg={"aliceblue"}
+        bg={"white"}
+        style={{
+          boxShadow: "0px 0px 10px white, 0px 0px 20px gray",
+        }}
       >
         <Text size="2rem" fw={700}>
           Welcome to AntStack

@@ -12,7 +12,7 @@ const NavigationBar = () => {
       align={"center"}
       pos={"sticky"}
       top={"0rem"}
-      bg={"white"}
+      bg={"aliceblue"}
       style={{ zIndex: 1 }}
     >
       <Link to={PATH.home} style={{ all: "unset" }}>

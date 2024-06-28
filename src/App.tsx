@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import { MantineProvider } from "@mantine/core";
+import { Flex, MantineProvider } from "@mantine/core";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import NavigationBar from "./Navigation-Bar/Navigation-Bar";
 import SignupPage from "./Signup/Signup-Page";
@@ -12,10 +12,16 @@ import ErrorPage from "./Error/Error-Page";
 // fixed nav-bar component in all pages
 const Layout: TReact = () => {
   return (
-    <>
+    <Flex
+      justify={"center"}
+      direction={"column"}
+      p={"0rem 4rem"}
+      gap={"1.5rem"}
+      bg={"aliceblue"}
+    >
       <NavigationBar />
       <Outlet />
-    </>
+    </Flex>
   );
 };
 

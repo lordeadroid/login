@@ -3,7 +3,12 @@
     var(--mantine-color-white),
     var(--mantine-color-dark-7)
   );
-  background: linear-gradient(transparent, white, whitesmoke, aliceblue);
+  background: linear-gradient(
+    transparent,
+    white 20%,
+    whitesmoke 50%,
+    transparent 80%
+  );
 }
 
 .section {

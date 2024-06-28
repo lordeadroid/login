@@ -28,17 +28,17 @@ const HomePage = () => {
   return username === EMPTYSTRING ? (
     <Text>Homepage</Text>
   ) : (
-    <Flex wrap={"wrap"} justify={"center"} gap={"5rem 2rem"} p={"5rem 0rem"}>
+    <Flex wrap={"wrap"} justify={"space-around"}>
       {productsData.map((product) => {
         const { id, title, price, rating, tags, thumbnail } = product;
 
         return (
           <Card
             radius={"md"}
-            p={"md"}
             className={styles.card}
             key={id}
             w={"20rem"}
+            pb={"4rem"}
           >
             <Flex justify={"space-between"} direction={"column"} h={"25rem"}>
               <Image src={thumbnail} height={180} />
@@ -52,7 +52,6 @@ const HomePage = () => {
                 size={"xs"}
                 pos={"-webkit-sticky"}
                 top={"-16rem"}
-                left={"-1rem"}
                 color={ratingColor(rating)}
               >
                 {rating}

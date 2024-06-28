@@ -35,7 +35,7 @@ const ProductPage = () => {
         <Image
           src={mainImage}
           radius={"md"}
-          bg={"linear-gradient(-45deg, transparent 90%, aliceblue)"}
+          bg={"linear-gradient(transparent, aliceblue 75%)"}
         />
       </Flex>
       <Flex direction={"column"}>
@@ -50,6 +50,7 @@ const ProductPage = () => {
             <Image
               src={imageURL}
               bg={"linear-gradient(135deg, transparent 50%, whitesmoke)"}
+              loading="lazy"
             />
           </Flex>
         ))}

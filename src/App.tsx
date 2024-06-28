@@ -17,7 +17,6 @@ const Layout: TReact = () => {
       direction={"column"}
       p={"0rem 4rem"}
       gap={"1.5rem"}
-      bg={"aliceblue"}
     >
       <NavigationBar />
       <Outlet />

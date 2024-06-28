@@ -47,7 +47,7 @@ export type TProduct = {
   thumbnail: string;
 };
 
-export type TProductPage = TProduct & {
+export type TProductPage = Omit<TProduct, "id"> & {
   id?: number;
   images: string[];
 };

@@ -1,5 +1,3 @@
-import { TProductPage } from "../types";
-
 export const EMPTYSTRING = "";
 
 export const INITIALLOGINFORM = {
@@ -61,7 +59,7 @@ export const RATING = {
   poor: "red",
 };
 
-export const INITIALPRODUCTDATA: TProductPage = {
+export const INITIALPRODUCTDATA = {
   title: EMPTYSTRING,
   price: 0,
   rating: 0,

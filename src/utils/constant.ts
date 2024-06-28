@@ -1,3 +1,5 @@
+import { TProductPage } from "../types";
+
 export const EMPTYSTRING = "";
 
 export const INITIALLOGINFORM = {
@@ -57,4 +59,13 @@ export const RATING = {
   good: "green",
   okay: "yellow",
   poor: "red",
+};
+
+export const INITIALPRODUCTDATA: TProductPage = {
+  title: EMPTYSTRING,
+  price: 0,
+  rating: 0,
+  tags: [EMPTYSTRING, EMPTYSTRING],
+  images: [EMPTYSTRING, EMPTYSTRING, EMPTYSTRING],
+  thumbnail: EMPTYSTRING,
 };

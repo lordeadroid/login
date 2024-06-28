@@ -48,5 +48,6 @@ export type TProduct = {
 };
 
 export type TProductPage = TProduct & {
+  id?: number;
   images: string[];
 };

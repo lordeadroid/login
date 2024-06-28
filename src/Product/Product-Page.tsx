@@ -49,7 +49,9 @@ const ProductPage = () => {
           >
             <Image
               src={imageURL}
-              bg={"linear-gradient(135deg, transparent 50%, whitesmoke)"}
+              bg={`linear-gradient(${
+                180 * index
+              }deg, transparent, whitesmoke 75%)`}
               loading="lazy"
             />
           </Flex>

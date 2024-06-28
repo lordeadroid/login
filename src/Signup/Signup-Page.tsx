@@ -55,47 +55,65 @@ const SignupPage: TReact = () => {
   };
 
   return (
-    <Flex align={"center"} justify={"center"} direction={"column"} p={"10rem"}>
-      <form onSubmit={form.onSubmit(handleSubmit)} className={styles.form}>
-        <Flex direction={"column"} gap={"0.75rem"}>
-          <TextInput
-            placeholder="username"
-            size="xl"
-            {...form.getInputProps("username")}
-          />
-          <TextInput
-            placeholder="email"
-            size="xl"
-            {...form.getInputProps("email")}
-          />
-          <TextInput
-            placeholder="number (optional)"
-            size="xl"
-            {...form.getInputProps("number")}
-          />
-          <PasswordInput
-            placeholder="password"
-            size="xl"
-            {...form.getInputProps("password")}
-          />
-          <RadioGroup
-            label="Nationality"
-            size="md"
-            {...form.getInputProps("nationality")}
-          >
-            <Group>
-              <Radio value="indian" label="Indian" />
-              <Radio value="other" label="Other" />
-            </Group>
-          </RadioGroup>
+    <Flex w={"80vw"} h={"80vh"} justify={"center"} align={"center"} m={"auto"}>
+      <Flex
+        justify={"center"}
+        align={"center"}
+        direction={"column"}
+        w={"40vw"}
+        p={"4rem"}
+        gap={"1rem"}
+        bg={"aliceblue"}
+      >
+        <Text size="2rem" fw={700}>
+          Welcome to AntStack
+        </Text>
+        <Flex gap={"1rem"}>
+          <Text>Already have an account?</Text>
+          <Link to={PATH.login}>Login</Link>
         </Flex>
-        <Button type="submit" size="lg">
-          Submit
-        </Button>
-      </form>
-      <Flex gap={"0.5rem"} p={"1rem"}>
-        <Text>Already have an account?</Text>
-        <Link to={PATH.login}>Login</Link>
+        <form onSubmit={form.onSubmit(handleSubmit)} className={styles.form}>
+          <Flex direction={"column"} gap={"1rem"}>
+            <TextInput
+              w="25rem"
+              size="lg"
+              label="Username"
+              placeholder="username"
+              {...form.getInputProps("username")}
+            />
+            <TextInput
+              size="lg"
+              label="Email"
+              placeholder="email"
+              {...form.getInputProps("email")}
+            />
+            <TextInput
+              size="lg"
+              label="Number"
+              placeholder="number (optional)"
+              {...form.getInputProps("number")}
+            />
+            <PasswordInput
+              size="lg"
+              label="Password"
+              placeholder="password"
+              {...form.getInputProps("password")}
+            />
+            <RadioGroup
+              size="lg"
+              label="Nationality"
+              {...form.getInputProps("nationality")}
+            >
+              <Group>
+                <Radio value="indian" label="Indian" />
+                <Radio value="other" label="Other" />
+              </Group>
+            </RadioGroup>
+          </Flex>
+          <Button type="submit" size="lg">
+            Submit
+          </Button>
+        </form>
       </Flex>
     </Flex>
   );

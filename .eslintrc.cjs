@@ -26,7 +26,6 @@ module.exports = {
     "max-statements": ["warn", 15],
     "max-len": "error",
     "no-unsafe-optional-chaining": ["error"],
-    "no-unused-vars": ["error", { varsIgnorePattern: "_" }],
     "no-console": "error",
     "no-cond-assign": "error",
     "no-dupe-keys": "error",

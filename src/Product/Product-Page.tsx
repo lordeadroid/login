@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Flex, Image, Text } from "@mantine/core";
+import { Badge, Button, Flex, Image, Text } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -83,7 +83,7 @@ const ProductPage = () => {
           <Flex className={styles.section} gap={"0.5rem"}>
             {tags.map((tag, index) => {
               return (
-                <Badge size="sm" variant="light" key={index}>
+                <Badge size="md" variant="light" key={index}>
                   {tag}
                 </Badge>
               );

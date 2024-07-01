@@ -50,4 +50,5 @@ export type TProduct = {
 export type TProductPage = Omit<TProduct, "id"> & {
   id?: number;
   images: string[];
+  description: string;
 };

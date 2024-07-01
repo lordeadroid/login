@@ -66,4 +66,5 @@ export const INITIALPRODUCTDATA = {
   tags: [EMPTYSTRING, EMPTYSTRING],
   images: [EMPTYSTRING, EMPTYSTRING, EMPTYSTRING],
   thumbnail: EMPTYSTRING,
+  description: EMPTYSTRING,
 };

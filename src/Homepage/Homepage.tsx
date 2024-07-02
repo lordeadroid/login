@@ -25,7 +25,7 @@ const HomePage = () => {
     return RATING.poor;
   };
 
-  const loggedIn: boolean = username === EMPTYSTRING;
+  const loggedIn: boolean = username !== EMPTYSTRING;
 
   return (
     <Flex wrap={"wrap"}>

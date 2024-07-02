@@ -25,23 +25,17 @@ const HomePage = () => {
     return RATING.poor;
   };
 
+  const loggedIn: boolean = username === EMPTYSTRING;
+
   return (
     <Flex wrap={"wrap"}>
-      {username === EMPTYSTRING ? (
-        <Text>Homepage</Text>
-      ) : (
-        <Flex wrap={"wrap"} justify={"space-between"}>
+      {loggedIn ? (
+        <Flex wrap={"wrap"} justify={"center"} gap="4vh">
           {productsData.map((product) => {
             const { id, title, price, rating, tags, thumbnail } = product;
 
             return (
-              <Card
-                radius={"md"}
-                className={styles.card}
-                key={id}
-                w={"20rem"}
-                pb={"4rem"}
-              >
+              <Card radius={"md"} className={styles.card} key={id} w="20rem">
                 <Flex
                   justify={"space-between"}
                   direction={"column"}
@@ -87,6 +81,8 @@ const HomePage = () => {
             );
           })}
         </Flex>
+      ) : (
+        <Text>Homepage</Text>
       )}
     </Flex>
   );

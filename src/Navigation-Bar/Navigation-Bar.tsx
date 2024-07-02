@@ -6,18 +6,16 @@ import { PATH } from "../utils/constant";
 const NavigationBar = () => {
   return (
     <Flex
-      h={"5rem"}
-      p={"1rem"}
-      justify={"space-between"}
-      align={"center"}
       pos={"sticky"}
-      top={"0rem"}
+      top={0}
       bg={"aliceblue"}
       style={{ zIndex: 1 }}
+      align={"center"}
+      justify={"space-between"}
     >
       <Link to={PATH.home} style={{ all: "unset" }}>
-        <Text size="4rem" fw={900}>
-          antstack
+        <Text size="5vh" fw={800}>
+          AntStack
         </Text>
       </Link>
       <UserSection />

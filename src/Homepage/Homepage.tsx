@@ -26,11 +26,11 @@ const HomePage = () => {
   };
 
   return username === EMPTYSTRING ? (
-    <Flex h={"85vh"} justify={"center"} align={"center"}>
+    <Flex>
       <Text>Homepage</Text>
     </Flex>
   ) : (
-    <Flex wrap={"wrap"} justify={"space-around"}>
+    <Flex wrap={"wrap"} justify={"space-between"}>
       {productsData.map((product) => {
         const { id, title, price, rating, tags, thumbnail } = product;
 

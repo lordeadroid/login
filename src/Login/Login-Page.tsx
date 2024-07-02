@@ -49,14 +49,11 @@ const LoginPage: TReact = () => {
   });
 
   return (
-    <Flex w={"80vw"} h={"85vh"} justify={"center"} align={"center"} m={"auto"}>
+    <Flex justify={"center"} align={"center"} m={"auto"}>
       <Flex
         justify={"center"}
         align={"center"}
         direction={"column"}
-        w={"40vw"}
-        p={"4rem"}
-        gap={"1rem"}
         bg={"white"}
         style={{
           boxShadow: "0px 0px 10px white, 0px 0px 20px gray",
@@ -72,7 +69,6 @@ const LoginPage: TReact = () => {
         <form onSubmit={form.onSubmit(handleSubmit)} className={styles.form}>
           <Flex direction={"column"} gap={"1rem"} p={"xl"}>
             <TextInput
-              w="25rem"
               size="lg"
               label="Username"
               placeholder="username"

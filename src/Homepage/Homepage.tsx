@@ -25,62 +25,69 @@ const HomePage = () => {
     return RATING.poor;
   };
 
-  return username === EMPTYSTRING ? (
-    <Flex>
-      <Text>Homepage</Text>
-    </Flex>
-  ) : (
-    <Flex wrap={"wrap"} justify={"space-between"}>
-      {productsData.map((product) => {
-        const { id, title, price, rating, tags, thumbnail } = product;
+  return (
+    <Flex wrap={"wrap"}>
+      {username === EMPTYSTRING ? (
+        <Text>Homepage</Text>
+      ) : (
+        <Flex wrap={"wrap"} justify={"space-between"}>
+          {productsData.map((product) => {
+            const { id, title, price, rating, tags, thumbnail } = product;
 
-        return (
-          <Card
-            radius={"md"}
-            className={styles.card}
-            key={id}
-            w={"20rem"}
-            pb={"4rem"}
-          >
-            <Flex justify={"space-between"} direction={"column"} h={"25rem"}>
-              <Image src={thumbnail} height={180} />
-              <Flex align={"center"}>
-                <Text fz={"lg"} fw={600}>
-                  {title}
-                </Text>
-              </Flex>
-              <Button
-                w={"3.5rem"}
-                size={"xs"}
-                pos={"-webkit-sticky"}
-                top={"-16rem"}
-                color={ratingColor(rating)}
+            return (
+              <Card
+                radius={"md"}
+                className={styles.card}
+                key={id}
+                w={"20rem"}
+                pb={"4rem"}
               >
-                {rating}
-              </Button>
-              <Card.Section className={styles.section}>
-                {tags.map((tag, index) => {
-                  return (
-                    <Badge size="sm" variant="light" key={index}>
-                      {tag}
-                    </Badge>
-                  );
-                })}
-              </Card.Section>
-              <Flex gap={"0.5rem"}>
-                <Link to={`products/${id}`}>
-                  <Button radius="md" style={{ flex: 1 }} w={"11rem"}>
-                    Show details
+                <Flex
+                  justify={"space-between"}
+                  direction={"column"}
+                  h={"25rem"}
+                >
+                  <Image src={thumbnail} height={180} />
+                  <Flex align={"center"}>
+                    <Text fz={"lg"} fw={600}>
+                      {title}
+                    </Text>
+                  </Flex>
+                  <Button
+                    w={"3.5rem"}
+                    size={"xs"}
+                    pos={"-webkit-sticky"}
+                    top={"-16rem"}
+                    left={"-0.5rem"}
+                    color={ratingColor(rating)}
+                  >
+                    {rating}
                   </Button>
-                </Link>
-                <Button radius="md" style={{ flex: 1 }} color="teal">
-                  ${price}
-                </Button>
-              </Flex>
-            </Flex>
-          </Card>
-        );
-      })}
+                  <Card.Section className={styles.section}>
+                    {tags.map((tag, index) => {
+                      return (
+                        <Badge size="sm" variant="light" key={index}>
+                          {tag}
+                        </Badge>
+                      );
+                    })}
+                  </Card.Section>
+                  <Flex gap={"0.5rem"}>
+                    <Link to={`products/${id}`}>
+                      <Button radius="md" style={{ flex: 1 }} w={"11rem"}>
+                        Show details
+                      </Button>
+                    </Link>
+                    <Button radius="md" style={{ flex: 1 }} color="teal">
+                      ${price}
+                    </Button>
+                  </Flex>
+                </Flex>
+              </Card>
+            );
+          })}
+        </Flex>
+      )}
     </Flex>
   );
 };

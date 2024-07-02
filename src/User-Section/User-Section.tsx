@@ -14,7 +14,7 @@ const LogoutButton: TReact = () => {
   };
 
   return (
-    <Button size="lg" onClick={handleLogout}>
+    <Button size="md" onClick={handleLogout}>
       Logout
     </Button>
   );
@@ -28,7 +28,7 @@ const LoginButton: TReact = () => {
   };
 
   return (
-    <Button size="lg" onClick={handleLogin}>
+    <Button size="md" onClick={handleLogin}>
       Login
     </Button>
   );
@@ -36,9 +36,9 @@ const LoginButton: TReact = () => {
 
 const Profile = ({ username }: { username: string }): React.JSX.Element => {
   return (
-    <Flex gap={"1rem"} align={"center"}>
-      <Text size="1.5rem" fs={"italic"}>
-        Welcome, {username}
+    <Flex gap="1rem" align={"center"}>
+      <Text size="1.25rem" fs={"italic"}>
+        {username}
       </Text>
       <LogoutButton />
     </Flex>

@@ -12,7 +12,7 @@ import ErrorPage from "./Error/Error-Page";
 // fixed nav-bar component in all pages
 const Layout: TReact = () => {
   return (
-    <Flex direction={"column"} p="2vw 4vw" gap={"5vh"}>
+    <Flex direction={"column"} p="2vh 4vw" gap={"4vh"}>
       <NavigationBar />
       <Outlet />
     </Flex>

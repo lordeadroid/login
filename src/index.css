@@ -10,3 +10,7 @@ body {
   font-family: system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue";
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}

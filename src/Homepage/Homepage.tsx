@@ -1,6 +1,6 @@
 import { Badge, Button, Card, Flex, Image, Text } from "@mantine/core";
 import { TProduct, TSignupFormData } from "../types";
-import { EMPTYSTRING, RATING } from "../utils/constant";
+import { EMPTYSTRING, PATH, RATING } from "../utils/constant";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./homepage.module.css";
@@ -71,7 +71,7 @@ const HomePage = () => {
                         variant="gradient"
                         gradient={{ from: "cyan", to: "blue", deg: 45 }}
                       >
-                        <Link to="/cart" style={{ all: "unset" }}>
+                        <Link to={PATH.cart} style={{ all: "unset" }}>
                           <Text>Cart</Text>
                         </Link>
                       </Badge>

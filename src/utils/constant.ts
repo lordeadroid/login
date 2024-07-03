@@ -37,6 +37,7 @@ export const NATIONALITY = {
 
 export const PATH = {
   home: "/",
+  cart: "/cart",
   login: "/login",
   signup: "/signup",
 };

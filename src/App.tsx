@@ -8,6 +8,7 @@ import LoginPage from "./Login/Login-Page";
 import HomePage from "./Homepage/Homepage";
 import ProductPage from "./Product/Product-Page";
 import ErrorPage from "./Error/Error-Page";
+import CartPage from "./Cart/Cart-Page";
 
 // fixed nav-bar component in all pages
 const Layout: TReact = () => {
@@ -25,8 +26,9 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/signup", element: <SignupPage /> },
+      { path: "/cart", element: <CartPage /> },
       { path: "/login", element: <LoginPage /> },
+      { path: "/signup", element: <SignupPage /> },
       { path: "/products/:id", element: <ProductPage /> },
     ],
     errorElement: <ErrorPage />,

@@ -32,17 +32,21 @@
 
 - create card from fetched data [x]
 - changed login and logout page
-- skeleton loading page on homepage and product page
+- skeleton loading page on homepage and product page [x]
 
 ---
 
 # Questions
 
-- Typescript
-
-  1. Adding explictly types for variables.
-  2. For some varibles from lib, types are not available.
-
 - Frontend Testing
+
+- React
+
+  1. How to render elements one by one in react.
+  2. Positioning of elements.
+
+- Mantine
+
+  1. How to add media queries in mantine components.
 
 ---

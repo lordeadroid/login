@@ -16,6 +16,7 @@ export const INITIALSIGNUPFORM = {
   password: EMPTYSTRING,
   number: EMPTYSTRING,
   nationality: EMPTYSTRING,
+  cart: <number[]>[],
 };
 
 export const LOCALSTORAGE = {

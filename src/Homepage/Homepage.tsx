@@ -1,23 +1,29 @@
 import { Badge, Button, Card, Flex, Image, Text } from "@mantine/core";
-import { TProduct } from "../types";
+import { TProduct, TSignupFormData } from "../types";
 import { EMPTYSTRING, RATING } from "../utils/constant";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./homepage.module.css";
 import { Link } from "react-router-dom";
-import { useLoginStore } from "../utils/use-store";
+import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 
 const HomePage = () => {
   const url = "https://dummyjson.com/products";
   const username = useLoginStore((state) => state.username);
+  const entries = useDatabaseStore((state) => state.entries);
+  const addItemToCart = useDatabaseStore((state) => state.addItemToCart);
   const [productsData, setProductsData] = useState<TProduct[]>([]);
+  const userData = entries.find((entry) => entry.username === username);
+  const { cart } = (userData as TSignupFormData) || {};
+
+  const [cartItems, setCartItems] = useState(cart);
 
   useEffect(() => {
     axios.get(url).then(({ data }) => {
       const { products } = data;
       setProductsData(products);
     });
-  }, []);
+  }, [cartItems]);
 
   const ratingColor = (rating: number): string => {
     if (rating >= 4) return RATING.good;
@@ -42,21 +48,48 @@ const HomePage = () => {
                   h={"25rem"}
                 >
                   <Image src={thumbnail} height={180} />
+
                   <Flex align={"center"}>
                     <Text fz={"lg"} fw={600}>
                       {title}
                     </Text>
                   </Flex>
-                  <Button
-                    w={"3.5rem"}
-                    size={"xs"}
-                    pos={"-webkit-sticky"}
+
+                  <Flex
+                    pos={"relative"}
                     top={"-16rem"}
-                    left={"-0.5rem"}
-                    color={ratingColor(rating)}
+                    align={"center"}
+                    justify={"space-between"}
                   >
-                    {rating}
-                  </Button>
+                    <Button size={"xs"} color={ratingColor(rating)}>
+                      {rating}
+                    </Button>
+
+                    {cart.includes(id) ? (
+                      <Badge
+                        size="lg"
+                        variant="gradient"
+                        gradient={{ from: "cyan", to: "blue", deg: 45 }}
+                      >
+                        <Link to="/cart" style={{ all: "unset" }}>
+                          <Text>Cart</Text>
+                        </Link>
+                      </Badge>
+                    ) : (
+                      <Badge
+                        size="lg"
+                        variant="gradient"
+                        gradient={{ from: "cyan", to: "blue", deg: 45 }}
+                        onClick={() => {
+                          addItemToCart(username, id);
+                          setCartItems([...cart, id]);
+                        }}
+                      >
+                        <Text>Add</Text>
+                      </Badge>
+                    )}
+                  </Flex>
+
                   <Card.Section className={styles.section}>
                     {tags.map((tag, index) => {
                       return (
@@ -66,6 +99,7 @@ const HomePage = () => {
                       );
                     })}
                   </Card.Section>
+
                   <Flex gap={"0.5rem"}>
                     <Link to={`products/${id}`}>
                       <Button radius="md" style={{ flex: 1 }} w={"11rem"}>

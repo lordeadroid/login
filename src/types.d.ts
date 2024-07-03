@@ -4,6 +4,7 @@ export type TSignupFormData = {
   password: string;
   number: string;
   nationality: string;
+  cart: number[];
 };
 
 export type TLoginFormData = {
@@ -22,6 +23,7 @@ export type TReact = () => React.JSX.Element;
 export type TDatabaseStore = {
   entries: TSignupFormData[];
   addEntry: (newEntry: TSignupFormData) => void;
+  addItemToCart: (username: string, id: numebr) => void;
 };
 
 export type TLoginStore = {

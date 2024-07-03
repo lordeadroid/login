@@ -13,11 +13,7 @@ const LogoutButton: TReact = () => {
     navigate(PATH.home);
   };
 
-  return (
-    <Button size="md" onClick={handleLogout}>
-      Logout
-    </Button>
-  );
+  return <Button onClick={handleLogout}>Logout</Button>;
 };
 
 const LoginButton: TReact = () => {
@@ -27,17 +23,13 @@ const LoginButton: TReact = () => {
     navigate(PATH.login);
   };
 
-  return (
-    <Button size="md" onClick={handleLogin}>
-      Login
-    </Button>
-  );
+  return <Button onClick={handleLogin}>Login</Button>;
 };
 
 const Profile = ({ username }: { username: string }): React.JSX.Element => {
   return (
-    <Flex gap="1rem" align={"center"}>
-      <Text size="1.25rem" fs={"italic"}>
+    <Flex gap="md" align="center">
+      <Text size="xl" fs="italic">
         {username}
       </Text>
       <LogoutButton />

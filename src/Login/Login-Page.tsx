@@ -56,7 +56,8 @@ const LoginPage: TReact = () => {
         p={"xl"}
         gap={"lg"}
         style={{
-          boxShadow: "0px 0px 10px white, 0px 0px 20px gray",
+          boxShadow: "0 0 0.5rem white, 0 0 1rem gray",
+          borderRadius: "0.5rem",
         }}
       >
         <Text size="3.5vh" fw={700}>

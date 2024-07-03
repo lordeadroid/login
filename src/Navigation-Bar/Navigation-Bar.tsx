@@ -15,7 +15,7 @@ const NavigationBar = () => {
       justify={"space-between"}
     >
       <Link to={PATH.home} style={{ all: "unset" }}>
-        <Text size="4vh" fw={800}>
+        <Text fw={700} fz={"h1"}>
           AntStack
         </Text>
       </Link>

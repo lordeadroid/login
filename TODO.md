@@ -44,6 +44,7 @@
 
   1. How to render elements one by one in react.
   2. Positioning of elements.
+  3. Create theme or create components.
 
 - Mantine
 

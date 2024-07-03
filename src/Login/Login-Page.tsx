@@ -3,7 +3,6 @@ import { TLoginFormData, TReact } from "../types";
 import { EMPTYSTRING, ERROR, INITIALLOGINFORM, PATH } from "../utils/constant";
 import { loginFormValidator } from "../utils/form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
-import styles from "../style.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
@@ -49,25 +48,37 @@ const LoginPage: TReact = () => {
   });
 
   return (
-    <Flex justify={"center"} align={"center"} m={"auto"}>
+    <Flex justify={"center"}>
       <Flex
-        justify={"center"}
         align={"center"}
         direction={"column"}
         bg={"white"}
+        p={"xl"}
+        gap={"lg"}
         style={{
           boxShadow: "0px 0px 10px white, 0px 0px 20px gray",
         }}
       >
-        <Text size="2rem" fw={700}>
+        <Text size="3.5vh" fw={700}>
           Welcome to AntStack
         </Text>
-        <Flex gap={"1rem"}>
+
+        <Flex gap={"xs"}>
           <Text>Don't have an account?</Text>
           <Link to={PATH.signup}>Signup</Link>
         </Flex>
-        <form onSubmit={form.onSubmit(handleSubmit)} className={styles.form}>
-          <Flex direction={"column"} gap={"1rem"} p={"xl"}>
+
+        <form
+          onSubmit={form.onSubmit(handleSubmit)}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "4vh",
+          }}
+        >
+          <Flex direction={"column"} gap={"lg"} p={"lg"}>
             <TextInput
               size="lg"
               label="Username"

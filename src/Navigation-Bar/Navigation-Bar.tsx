@@ -10,7 +10,7 @@ const NavigationBar = () => {
       pos={"sticky"}
       top={0}
       bg={"aliceblue"}
-      style={{ zIndex: 1 }}
+      style={{ zIndex: 1, cursor: "pointer" }}
       align={"center"}
       justify={"space-between"}
     >

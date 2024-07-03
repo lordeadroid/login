@@ -31,23 +31,17 @@ const ProductPage = () => {
   };
 
   return (
-    <Flex gap={"5rem"}>
-      <Flex gap={"0.5rem"}>
-        <Button
-          w={"3.5rem"}
-          size={"xs"}
-          pos={"fixed"}
-          left={"5rem"}
-          color={ratingColor(rating)}
-        >
+    <Flex gap={"xl"}>
+      <Flex>
+        <Button size={"xs"} pos={"fixed"} color={ratingColor(rating)}>
           {rating}
         </Button>
         <Flex
-          h={"50rem"}
-          w={"35rem"}
+          h={"80vh"}
+          w={"30vw"}
           justify={"center"}
           className={loadingStyle}
-          style={{ borderRadius: "1rem" }}
+          style={{ borderRadius: "0.5rem" }}
         >
           <Image
             src={mainImage}
@@ -55,14 +49,14 @@ const ProductPage = () => {
             bg={"linear-gradient(transparent, whitesmoke 75%)"}
           />
         </Flex>
-        <Flex direction={"column"} gap={"0.5rem"}>
+        <Flex direction={"column"}>
           {restImages.map((imageURL, index) => (
             <Flex
-              h={"25rem"}
-              w={"25rem"}
+              h={"40vh"}
+              w={"15vw"}
               className={loadingStyle}
               key={index}
-              style={{ borderRadius: "1rem" }}
+              style={{ borderRadius: "0.5rem" }}
             >
               <Image
                 src={imageURL}
@@ -75,22 +69,20 @@ const ProductPage = () => {
           ))}
         </Flex>
       </Flex>
-      <Flex>
-        <Flex gap={"1rem"} direction={"column"}>
-          <Text fz={"h2"} fw={"700"}>
-            {title}
-          </Text>
-          <Flex className={styles.section} gap={"0.5rem"}>
-            {tags.map((tag, index) => {
-              return (
-                <Badge size="md" variant="light" key={index}>
-                  {tag}
-                </Badge>
-              );
-            })}
-          </Flex>
-          <Text>{description}</Text>
+      <Flex gap={"xs"} direction={"column"}>
+        <Text fz={"h2"} fw={"700"} className={loadingStyle}>
+          {title}
+        </Text>
+        <Flex className={styles.section} gap={"xs"}>
+          {tags.map((tag, index) => {
+            return (
+              <Badge size="md" variant="light" key={index}>
+                {tag}
+              </Badge>
+            );
+          })}
         </Flex>
+        <Text>{description}</Text>
       </Flex>
     </Flex>
   );

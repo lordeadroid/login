@@ -41,14 +41,9 @@ const HomePage = () => {
             const { id, title, price, rating, tags, thumbnail } = product;
 
             return (
-              <Card radius={"md"} className={styles.card} key={id} w="20rem">
-                <Flex
-                  justify={"space-between"}
-                  direction={"column"}
-                  h={"25rem"}
-                >
-                  <Image src={thumbnail} height={180} />
-
+              <Card radius="md" className={styles.card} key={id} w="20rem">
+                <Flex justify="space-between" direction="column">
+                  <Image src={thumbnail} />
                   <Flex align={"center"}>
                     <Text fz={"lg"} fw={600}>
                       {title}
@@ -57,7 +52,7 @@ const HomePage = () => {
 
                   <Flex
                     pos={"relative"}
-                    top={"-16rem"}
+                    top={"-20rem"}
                     align={"center"}
                     justify={"space-between"}
                   >
@@ -69,7 +64,7 @@ const HomePage = () => {
                       <Badge
                         size="lg"
                         variant="gradient"
-                        gradient={{ from: "cyan", to: "blue", deg: 45 }}
+                        gradient={{ from: "green", to: "blue", deg: 45 }}
                       >
                         <Link to={PATH.cart} style={{ all: "unset" }}>
                           <Text>Cart</Text>
@@ -79,7 +74,7 @@ const HomePage = () => {
                       <Badge
                         size="lg"
                         variant="gradient"
-                        gradient={{ from: "cyan", to: "blue", deg: 45 }}
+                        gradient={{ from: "green", to: "blue", deg: 45 }}
                         onClick={() => {
                           addItemToCart(username, id);
                           setCartItems([...cart, id]);
@@ -93,14 +88,18 @@ const HomePage = () => {
                   <Card.Section className={styles.section}>
                     {tags.map((tag, index) => {
                       return (
-                        <Badge size="sm" variant="light" key={index}>
+                        <Badge
+                          size="sm"
+                          variant="light"
+                          key={index}
+                          m={"0.25rem"}
+                        >
                           {tag}
                         </Badge>
                       );
                     })}
                   </Card.Section>
-
-                  <Flex gap={"0.5rem"}>
+                  <Flex gap={"xs"}>
                     <Link to={`products/${id}`}>
                       <Button radius="md" style={{ flex: 1 }} w={"11rem"}>
                         Show details

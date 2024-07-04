@@ -14,11 +14,9 @@ const HomePage = () => {
   const addItemToCart = useDatabaseStore((state) => state.addItemToCart);
   const [productsData, setProductsData] = useState<TProduct[]>([]);
   const entries = useDatabaseStore((state) => state.entries);
-
   const { cart } =
     (entries.find((entry) => entry.username === username) as TSignupFormData) ||
     {};
-  const [cartItems, setCartItems] = useState<number[]>(cart);
 
   const ratingColor = (rating: number): string => {
     if (rating >= 4) return RATING.good;
@@ -58,7 +56,7 @@ const HomePage = () => {
                   <Button size={"xs"} color={ratingColor(rating)}>
                     {rating}
                   </Button>
-                  {cartItems.includes(id) ? (
+                  {cart.includes(id) ? (
                     <Button size="xs" color="lime">
                       Added
                     </Button>
@@ -66,10 +64,7 @@ const HomePage = () => {
                     <Button
                       size="xs"
                       color="indigo"
-                      onClick={() => {
-                        addItemToCart(username, id);
-                        setCartItems([...cart, id]);
-                      }}
+                      onClick={() => addItemToCart(username, id)}
                     >
                       Add
                     </Button>

@@ -58,27 +58,17 @@ const HomePage = () => {
                     {rating}
                   </Button>
                   {cart.includes(id) ? (
-                    <Badge
-                      size="lg"
-                      variant="gradient"
-                      gradient={{ from: "green", to: "blue", deg: 45 }}
-                    >
-                      <Link to={PATH.cart} style={{ all: "unset" }}>
-                        <Text>Cart</Text>
-                      </Link>
-                    </Badge>
+                    <Button color="lime" size="xs">
+                      Added
+                    </Button>
                   ) : (
-                    <Badge
-                      size="lg"
-                      variant="gradient"
-                      gradient={{ from: "green", to: "blue", deg: 45 }}
-                      onClick={() => {
-                        addItemToCart(username, id);
-                        setCartItems([...cart, id]);
-                      }}
+                    <Button
+                      color="orange"
+                      size="xs"
+                      onClick={() => addItemToCart(username, id)}
                     >
-                      <Text>Add</Text>
-                    </Badge>
+                      Add
+                    </Button>
                   )}
                 </Flex>
                 <Card.Section className={styles.section}>

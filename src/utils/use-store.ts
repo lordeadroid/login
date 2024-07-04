@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { EMPTYSTRING, STORE } from "./constant";
-import { TDatabaseStore, TLoginStore, TSignupFormData } from "../types";
+import { TDatabaseStore, TLoginStore } from "../types";
 import { persist } from "zustand/middleware";
 import users from "../../users.json";
 
@@ -12,14 +12,16 @@ export const useDatabaseStore = create<TDatabaseStore>()(
         set((state) => ({ entries: [...state.entries, newEntry] })),
       addItemToCart: (username, id) => {
         set((state) => {
-          const entry = state.entries.find(
-            (entry) => entry.username === username
-          ) as TSignupFormData;
+          const updatedEntries = state.entries.map((entry) => {
+            if (entry.username === username) {
+              const cart = [...entry.cart, id];
+              const updateEntry = { ...entry, cart };
+              return updateEntry;
+            }
+            return entry;
+          });
 
-          const newCart = [...entry.cart, id];
-          entry.cart = newCart;
-
-          return { entries: state.entries };
+          return { entries: updatedEntries };
         });
       },
     }),

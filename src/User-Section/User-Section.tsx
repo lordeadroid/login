@@ -14,7 +14,11 @@ const LogoutButton: TReact = () => {
     navigate(PATH.login);
   };
 
-  return <Button onClick={handleLogout}>Logout</Button>;
+  return (
+    <Button size="lg" onClick={handleLogout}>
+      Logout
+    </Button>
+  );
 };
 
 const LoginButton: TReact = () => {
@@ -24,7 +28,11 @@ const LoginButton: TReact = () => {
     navigate(PATH.login);
   };
 
-  return <Button onClick={handleLogin}>Login</Button>;
+  return (
+    <Button size="lg" onClick={handleLogin}>
+      Login
+    </Button>
+  );
 };
 
 const CartDetails = ({ username }: { username: string }) => {
@@ -37,21 +45,19 @@ const CartDetails = ({ username }: { username: string }) => {
     <Flex
       align={"center"}
       gap={"xs"}
-      bg={"blue"}
-      p={"1.5 12"}
+      bg={"indigo"}
+      p={"xs"}
       style={{ borderRadius: "0.5rem" }}
     >
-      <Image src={cartIcon} h={25} />
-      <Text size="xl" c={"white"}>
-        {cart.length}
-      </Text>
+      <Image src={cartIcon} h={30} />
+      <Text c={"white"}>{cart.length}</Text>
     </Flex>
   );
 };
 
 const Profile = ({ username }: { username: string }) => {
   return (
-    <Flex gap="md" align="center">
+    <Flex gap="md" align="center" justify={"center"}>
       <Text size="xl" fs="italic">
         {username}
       </Text>

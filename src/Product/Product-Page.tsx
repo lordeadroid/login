@@ -1,4 +1,4 @@
-import { Badge, Button, Flex, Image, Text } from "@mantine/core";
+import { Badge, Button, Flex, Image, Text, Title } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -32,7 +32,7 @@ const ProductPage = () => {
 
   return (
     <Flex gap={"xl"}>
-      <Flex>
+      <Flex gap={"md"}>
         <Button size={"xs"} pos={"fixed"} color={ratingColor(rating)}>
           {rating}
         </Button>
@@ -49,10 +49,10 @@ const ProductPage = () => {
             bg={"linear-gradient(transparent, whitesmoke 75%)"}
           />
         </Flex>
-        <Flex direction={"column"}>
+        <Flex direction={"column"} gap={"md"}>
           {restImages.map((imageURL, index) => (
             <Flex
-              h={"40vh"}
+              h={"39.25vh"}
               w={"15vw"}
               className={loadingStyle}
               key={index}
@@ -69,20 +69,18 @@ const ProductPage = () => {
           ))}
         </Flex>
       </Flex>
-      <Flex gap={"xs"} direction={"column"}>
-        <Text fz={"h2"} fw={"700"} className={loadingStyle}>
-          {title}
-        </Text>
+      <Flex gap={"xl"} direction={"column"}>
+        <Title className={loadingStyle}>{title}</Title>
         <Flex className={styles.section} gap={"xs"}>
           {tags.map((tag, index) => {
             return (
-              <Badge size="md" variant="light" key={index}>
+              <Badge size="xl" variant="light" key={index}>
                 {tag}
               </Badge>
             );
           })}
         </Flex>
-        <Text>{description}</Text>
+        <Text size="xl">{description}</Text>
       </Flex>
     </Flex>
   );

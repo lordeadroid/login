@@ -8,31 +8,34 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const url = "https://dummyjson.com/products";
   const username = useLoginStore((state) => state.username);
-  const entries = useDatabaseStore((state) => state.entries);
   const addItemToCart = useDatabaseStore((state) => state.addItemToCart);
   const [productsData, setProductsData] = useState<TProduct[]>([]);
-  const userData = entries.find((entry) => entry.username === username);
-  const { cart } = (userData as TSignupFormData) || {};
-  const navigate = useNavigate();
+  const entries = useDatabaseStore((state) => state.entries);
 
-  useEffect(() => {
-    axios.get(url).then(({ data }) => {
-      const { products } = data;
-      setProductsData(products);
-    });
-
-    if (username === EMPTYSTRING) {
-      navigate(PATH.login);
-    }
-  });
+  const { cart } =
+    (entries.find((entry) => entry.username === username) as TSignupFormData) ||
+    {};
+  const [cartItems, setCartItems] = useState<number[]>(cart);
 
   const ratingColor = (rating: number): string => {
     if (rating >= 4) return RATING.good;
     if (rating >= 3) return RATING.okay;
     return RATING.poor;
   };
+
+  useEffect(() => {
+    if (username === EMPTYSTRING) {
+      navigate(PATH.login);
+    }
+
+    axios.get(url).then(({ data }) => {
+      const { products } = data;
+      setProductsData(products);
+    });
+  }, [navigate, username]); // ?
 
   return (
     <Flex wrap={"wrap"}>
@@ -41,31 +44,32 @@ const HomePage = () => {
           const { id, title, price, rating, tags, thumbnail } = product;
           return (
             <Card radius="md" className={styles.card} key={id} w="20rem">
-              <Flex justify="space-between" direction="column">
+              <Flex
+                justify="space-between"
+                direction="column"
+                pos="relative"
+                h="30rem"
+              >
                 <Image src={thumbnail} />
-                <Flex align={"center"}>
-                  <Text fz={"lg"} fw={600}>
-                    {title}
-                  </Text>
-                </Flex>
-                <Flex
-                  pos={"relative"}
-                  top={"-20rem"}
-                  align={"center"}
-                  justify={"space-between"}
-                >
+                <Text fz={"lg"} fw={600}>
+                  {title}
+                </Text>
+                <Flex w={"100%"} pos={"absolute"} justify={"space-between"}>
                   <Button size={"xs"} color={ratingColor(rating)}>
                     {rating}
                   </Button>
-                  {cart.includes(id) ? (
-                    <Button color="lime" size="xs">
+                  {cartItems.includes(id) ? (
+                    <Button size="xs" color="lime">
                       Added
                     </Button>
                   ) : (
                     <Button
-                      color="orange"
                       size="xs"
-                      onClick={() => addItemToCart(username, id)}
+                      color="indigo"
+                      onClick={() => {
+                        addItemToCart(username, id);
+                        setCartItems([...cart, id]);
+                      }}
                     >
                       Add
                     </Button>
@@ -74,12 +78,7 @@ const HomePage = () => {
                 <Card.Section className={styles.section}>
                   {tags.map((tag, index) => {
                     return (
-                      <Badge
-                        size="sm"
-                        variant="light"
-                        key={index}
-                        m={"0.25rem"}
-                      >
+                      <Badge variant="light" key={index} m={"0.25rem"}>
                         {tag}
                       </Badge>
                     );

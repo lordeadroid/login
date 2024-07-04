@@ -3,6 +3,7 @@ import { useNavigate, NavigateFunction } from "react-router-dom";
 import { EMPTYSTRING, PATH } from "../utils/constant";
 import { TReact, TSignupFormData } from "../types";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
+import cartIcon from "../assets/cart.png";
 
 const LogoutButton: TReact = () => {
   const resetUsername = useLoginStore((state) => state.resetUsername);
@@ -40,7 +41,7 @@ const CartDetails = ({ username }: { username: string }) => {
       p={"1.5 12"}
       style={{ borderRadius: "0.5rem" }}
     >
-      <Image src="/src/assets/cart.png" h={25} />
+      <Image src={cartIcon} h={25} />
       <Text size="xl" c={"white"}>
         {cart.length}
       </Text>

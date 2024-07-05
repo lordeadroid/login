@@ -59,3 +59,10 @@ export type TAddToCartButton = {
   id: number;
   size?: string;
 };
+
+export type TButton = {
+  value?: string;
+  size?: string;
+  color?: string;
+  handleClick?: () => void;
+};

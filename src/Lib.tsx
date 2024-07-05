@@ -1,7 +1,16 @@
 import { Button } from "@mantine/core";
 import { useDatabaseStore, useLoginStore } from "./utils/use-store";
-import { TAddToCartButton, TSignupFormData } from "./types";
-import { ratingColor } from "./utils/utils";
+import { TAddToCartButton, TButton, TSignupFormData } from "./types";
+
+export const CreateButton = (props: TButton) => {
+  const { value, size = "xs", color, handleClick } = props;
+
+  return (
+    <Button size={size} color={color} onClick={handleClick}>
+      {value}
+    </Button>
+  );
+};
 
 export const AddToCartButton = (props: TAddToCartButton) => {
   const { id, size = "xs" } = props;
@@ -14,24 +23,13 @@ export const AddToCartButton = (props: TAddToCartButton) => {
     [];
 
   return cart.includes(id) ? (
-    <Button size={size} color="lime">
-      Added
-    </Button>
+    <CreateButton size={size} color="lime" value="added" />
   ) : (
-    <Button
+    <CreateButton
+      value="Add"
       size={size}
       color="indigo"
-      onClick={() => addItemToCart(username, id)}
-    >
-      Add
-    </Button>
-  );
-};
-
-export const RatingButton = ({ rating }: { rating: number }) => {
-  return (
-    <Button size={"xs"} color={ratingColor(rating)}>
-      {rating}
-    </Button>
+      handleClick={() => addItemToCart(username, id)}
+    />
   );
 };

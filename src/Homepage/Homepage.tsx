@@ -6,7 +6,8 @@ import axios from "axios";
 import styles from "./homepage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginStore } from "../utils/use-store";
-import { AddToCartButton, RatingButton } from "../Lib";
+import { AddToCartButton, CreateButton } from "../Lib";
+import { ratingColor } from "../utils/utils";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -49,7 +50,10 @@ const HomePage = () => {
                   {title}
                 </Text>
                 <Flex w={"100%"} pos={"absolute"} justify={"space-between"}>
-                  <RatingButton rating={rating} />
+                  <CreateButton
+                    value={`${rating}`}
+                    color={ratingColor(rating)}
+                  />
                   <AddToCartButton id={id} />
                 </Flex>
                 <Card.Section className={styles.section}>

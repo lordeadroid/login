@@ -1,4 +1,4 @@
-import { Badge, Flex, Image, Text, Title } from "@mantine/core";
+import { Badge, Flex, Group, Image, Text, Title } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -16,7 +16,17 @@ const ProductPage = () => {
   const [productData, setProductData] =
     useState<TProductPage>(INITIALPRODUCTDATA);
 
-  const { title, images, rating, description, tags, price } = productData;
+  const {
+    title,
+    images,
+    rating,
+    description,
+    tags,
+    price,
+    availabilityStatus,
+    stock,
+  } = productData;
+
   const loadingStyle = isFetching ? styles.skeletonLoading : EMPTYSTRING;
 
   useEffect(() => {
@@ -52,18 +62,30 @@ const ProductPage = () => {
           bd={"1px solid gray"}
         >
           <Flex pos={"absolute"} left={8} top={8}>
-            <CreateButton value={`${rating}`} color={ratingColor(rating)} />
+            <CreateButton
+              value={`${rating}`}
+              size="sm"
+              color={ratingColor(rating)}
+            />
           </Flex>
           <Image
             src={images[selectedImg]}
-            w={"40vw"}
+            w={"36vw"}
             fit="contain"
             bg={"linear-gradient(white, rgb(222, 226, 230) 100%)"}
           />
         </Flex>
       </Flex>
-      <Flex gap={"xl"} direction={"column"}>
+      <Flex gap={"lg"} direction={"column"}>
         <Title className={loadingStyle}>{title}</Title>
+        <Group gap={"xs"}>
+          <Badge color="green" size="lg">
+            {availabilityStatus}
+          </Badge>
+          <Badge variant="dot" color="green" size="lg">
+            {stock}
+          </Badge>
+        </Group>
         <Flex justify={"space-between"} align={"center"}>
           <Flex className={styles.section} gap={"xs"}>
             {tags.map((tag, index) => {
@@ -76,7 +98,7 @@ const ProductPage = () => {
           </Flex>
         </Flex>
         <Text size="xl">{description}</Text>
-        <Flex gap={'md'}>
+        <Flex gap={"md"}>
           <CreateButton value={`$ ${price}`} size="md" color="teal" />
           <AddToCartButton id={Number(id)} size="md" />
         </Flex>

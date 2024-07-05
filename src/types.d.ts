@@ -53,6 +53,8 @@ export type TProductPage = Omit<TProduct, "id"> & {
   id?: number;
   images: string[];
   description: string;
+  stock: number;
+  availabilityStatus: string;
 };
 
 export type TAddToCartButton = {

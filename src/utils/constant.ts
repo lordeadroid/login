@@ -69,4 +69,6 @@ export const INITIALPRODUCTDATA = {
   images: [EMPTYSTRING, EMPTYSTRING, EMPTYSTRING],
   thumbnail: EMPTYSTRING,
   description: EMPTYSTRING,
+  availabilityStatus: EMPTYSTRING,
+  stock: 0,
 };

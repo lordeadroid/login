@@ -1,10 +1,11 @@
-import { Badge, Button, Flex, Image, Text, Title } from "@mantine/core";
+import { Badge, Flex, Image, Text, Title } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TProductPage } from "../types";
 import styles from "../style.module.css";
-import { EMPTYSTRING, INITIALPRODUCTDATA, RATING } from "../utils/constant";
+import { EMPTYSTRING, INITIALPRODUCTDATA } from "../utils/constant";
+import { AddToCartButton, RatingButton } from "../Lib";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -24,21 +25,16 @@ const ProductPage = () => {
     });
   }, [url]); // ?
 
-  const ratingColor = (rating: number): string => {
-    if (rating >= 4) return RATING.good;
-    if (rating >= 3) return RATING.okay;
-    return RATING.poor;
-  };
-
   return (
     <Flex gap={"xl"}>
-      <Flex gap={"md"}>
-        <Button size={"xs"} pos={"fixed"} color={ratingColor(rating)}>
-          {rating}
-        </Button>
+      <Flex gap={"md"} pos={"relative"}>
+        <Flex pos={"absolute"} left={10} top={10}>
+          <RatingButton rating={rating} />
+        </Flex>
         <Flex
           h={"80vh"}
           w={"30vw"}
+          bd={"1px solid gray"}
           justify={"center"}
           className={loadingStyle}
           style={{ borderRadius: "0.5rem" }}
@@ -46,7 +42,7 @@ const ProductPage = () => {
           <Image
             src={mainImage}
             radius={"md"}
-            bg={"linear-gradient(transparent, whitesmoke 75%)"}
+            bg={"linear-gradient(white, rgb(222, 226, 230) 100%)"}
           />
         </Flex>
         <Flex direction={"column"} gap={"md"}>
@@ -60,9 +56,7 @@ const ProductPage = () => {
             >
               <Image
                 src={imageURL}
-                bg={`linear-gradient(${
-                  180 * index
-                }deg, transparent, whitesmoke 75%)`}
+                bg={`linear-gradient(${180 * index}deg, white, whitesmoke 50%)`}
                 loading="lazy"
               />
             </Flex>
@@ -71,14 +65,17 @@ const ProductPage = () => {
       </Flex>
       <Flex gap={"xl"} direction={"column"}>
         <Title className={loadingStyle}>{title}</Title>
-        <Flex className={styles.section} gap={"xs"}>
-          {tags.map((tag, index) => {
-            return (
-              <Badge size="xl" variant="light" key={index}>
-                {tag}
-              </Badge>
-            );
-          })}
+        <Flex justify={"space-between"} align={"center"}>
+          <Flex className={styles.section} gap={"xs"}>
+            {tags.map((tag, index) => {
+              return (
+                <Badge size="xl" variant="light" key={index}>
+                  {tag}
+                </Badge>
+              );
+            })}
+          </Flex>
+          <AddToCartButton id={Number(id)} size={"md"} />
         </Flex>
         <Text size="xl">{description}</Text>
       </Flex>

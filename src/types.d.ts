@@ -54,3 +54,8 @@ export type TProductPage = Omit<TProduct, "id"> & {
   images: string[];
   description: string;
 };
+
+export type TAddToCartButton = {
+  id: number;
+  size?: string;
+};

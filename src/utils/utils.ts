@@ -1,5 +1,5 @@
 import { TSignupFormData, TUserExist, TVerifiedUser } from "../types";
-import { LOCALSTORAGE } from "./constant";
+import { LOCALSTORAGE, RATING } from "./constant";
 
 export const updateLoginInfo = (username: string) => {
   localStorage.setItem(
@@ -28,4 +28,10 @@ export const isVerifiedUser: TVerifiedUser = (db, username, password) => {
   ) as TSignupFormData;
 
   return user.password === password;
+};
+
+export const ratingColor = (rating: number): string => {
+  if (rating >= 4) return RATING.good;
+  if (rating >= 3) return RATING.okay;
+  return RATING.poor;
 };

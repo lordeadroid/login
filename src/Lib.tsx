@@ -23,7 +23,7 @@ export const AddToCartButton = (props: TAddToCartButton) => {
     [];
 
   return cart.includes(id) ? (
-    <CreateButton size={size} color="lime" value="added" />
+    <CreateButton size={size} color="lime" value="Added" />
   ) : (
     <CreateButton
       value="Add"

@@ -71,4 +71,8 @@ export const INITIALPRODUCTDATA = {
   description: EMPTYSTRING,
   availabilityStatus: EMPTYSTRING,
   stock: 0,
+  dimensions: { height: 0, width: 0, depth: 0 },
+  shippingInformation: EMPTYSTRING,
+  warrantyInformation: EMPTYSTRING,
+  returnPolicy: EMPTYSTRING
 };

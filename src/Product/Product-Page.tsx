@@ -17,6 +17,7 @@ import styles from "../style.module.css";
 import { EMPTYSTRING, INITIALPRODUCTDATA } from "../utils/constant";
 import { AddToCartButton, CreateButton } from "../Lib";
 import { ratingColor } from "../utils/utils";
+import Comment from "../Comment/Comment";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -166,16 +167,12 @@ const ProductPage = () => {
         bd={"1px solid black"}
         style={{ borderRadius: "1rem" }}
       >
-        <Title>Comments</Title>
-        <List>
-          {reviews.map((review, index) => {
-            return (
-              <ListItem key={index}>
-                {review.comment} - {review.reviewerName}
-              </ListItem>
-            );
-          })}
-        </List>
+        <Title pb={"2rem"}>Comments</Title>
+        <Flex wrap={"wrap"} gap={'md'}>
+          {reviews.map((review, index) => (
+            <Comment key={index} review={review} />
+          ))}
+        </Flex>
       </Flex>
     </Flex>
   );

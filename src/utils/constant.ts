@@ -74,5 +74,13 @@ export const INITIALPRODUCTDATA = {
   dimensions: { height: 0, width: 0, depth: 0 },
   shippingInformation: EMPTYSTRING,
   warrantyInformation: EMPTYSTRING,
-  returnPolicy: EMPTYSTRING
+  returnPolicy: EMPTYSTRING,
+  reviews: [
+    {
+      rating: 0,
+      date: EMPTYSTRING,
+      comment: EMPTYSTRING,
+      reviewerName: EMPTYSTRING,
+    },
+  ],
 };

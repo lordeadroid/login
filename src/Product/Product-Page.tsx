@@ -5,11 +5,12 @@ import {
   Group,
   Image,
   List,
+  ListItem,
   Text,
   Title,
 } from "@mantine/core";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { TProductPage } from "../types";
 import styles from "../style.module.css";
@@ -32,6 +33,7 @@ const ProductPage = () => {
     title,
     images,
     rating,
+    reviews,
     dimensions,
     description,
     returnPolicy,
@@ -41,6 +43,7 @@ const ProductPage = () => {
   } = productData;
   const { height, width, depth } = dimensions;
   const loadingStyle = isFetching ? styles.skeletonLoading : EMPTYSTRING;
+  const commentsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     axios.get(url).then(({ data }) => {
@@ -50,103 +53,129 @@ const ProductPage = () => {
   }, [url]);
 
   return (
-    <Flex gap={"xl"}>
-      <Flex gap={"md"}>
-        <Flex direction={"column"} gap={"1rem"}>
-          {images.map((imgUrl, index) => {
-            const isSelectedImg = selectedImg === index;
-            return (
-              <Flex
-                h={"15rem"}
-                w={"10rem"}
-                onClick={() => setSelectedImg(index)}
-                key={index}
-              >
-                <Image
-                  src={imgUrl}
-                  radius={"sm"}
-                  bg={isSelectedImg ? "white" : "whitesmoke"}
-                  bd={isSelectedImg ? "1px solid black" : "1px solid darkgray"}
-                />
-              </Flex>
-            );
-          })}
+    <Flex gap={"xl"} direction={"column"}>
+      <Flex gap={"xl"}>
+        <Flex gap={"md"}>
+          <Flex direction={"column"} gap={"1rem"}>
+            {images.map((imgUrl, index) => {
+              const isSelectedImg = selectedImg === index;
+              return (
+                <Flex
+                  h={"15rem"}
+                  w={"10rem"}
+                  onClick={() => setSelectedImg(index)}
+                  key={index}
+                >
+                  <Image
+                    src={imgUrl}
+                    radius={"sm"}
+                    bg={isSelectedImg ? "white" : "whitesmoke"}
+                    bd={
+                      isSelectedImg ? "1px solid black" : "1px solid darkgray"
+                    }
+                  />
+                </Flex>
+              );
+            })}
+          </Flex>
+          <Flex
+            pos={"relative"}
+            justify={"center"}
+            className={loadingStyle}
+            bd={"1px solid gray"}
+          >
+            <Box pos={"absolute"} left={8} top={8}>
+              <CreateButton
+                value={`${rating}`}
+                size="sm"
+                handleClick={() => {
+                  commentsRef.current?.scrollIntoView({ behavior: "smooth" });
+                }}
+                color={ratingColor(rating)}
+              />
+            </Box>
+            <Flex h={"47rem"} w={"40rem"}>
+              <Image src={images[selectedImg]} />
+            </Flex>
+          </Flex>
         </Flex>
         <Flex
-          pos={"relative"}
-          justify={"center"}
-          className={loadingStyle}
+          gap={"lg"}
+          direction={"column"}
+          justify={"space-between"}
+          p={"xl"}
           bd={"1px solid gray"}
+          style={{ borderRadius: "0.5rem" }}
         >
-          <Box pos={"absolute"} left={8} top={8}>
-            <CreateButton
-              value={`${rating}`}
-              size="sm"
-              color={ratingColor(rating)}
-            />
-          </Box>
-          <Flex h={"47rem"} w={"40rem"}>
-            <Image src={images[selectedImg]} />
+          <Flex direction={"column"} gap={"lg"}>
+            <Title className={loadingStyle}>{title}</Title>
+            <Group>
+              <Badge color="green" size="lg">
+                {availabilityStatus}
+              </Badge>
+              <Badge variant="dot" color="green" size="lg">
+                {stock}
+              </Badge>
+            </Group>
+            <Group>
+              <Flex className={styles.section} gap={"xs"}>
+                {tags.map((tag, index) => {
+                  return (
+                    <Badge size="xl" variant="light" key={index}>
+                      {tag}
+                    </Badge>
+                  );
+                })}
+              </Flex>
+            </Group>
+            <Text size="xl">{description}</Text>
+            <Group>
+              <CreateButton value={`$ ${price}`} size="md" color="teal" />
+              <AddToCartButton id={Number(id)} size="md" />
+            </Group>
+          </Flex>
+          <Flex
+            direction={"column"}
+            p={"xl"}
+            bd={"1px solid darkgray"}
+            bg={"rgb(255, 244, 244)"}
+            style={{ borderRadius: "0.5rem" }}
+          >
+            <Text fw={700}>Additional Product Details</Text>
+            <Flex direction={"column"} p={"xs"}>
+              <List spacing={"xs"}>
+                <ListItem>Product Dimensions</ListItem>
+                <Flex direction={"column"} p={"0 25"}>
+                  <Text>Height: {height}</Text>
+                  <Text>Width: {width}</Text>
+                  <Text>Depth: {depth}</Text>
+                </Flex>
+                <ListItem>{warrantyInformation}</ListItem>
+                <ListItem>{shippingInformation}</ListItem>
+                <ListItem>{returnPolicy}</ListItem>
+              </List>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
       <Flex
-        gap={"lg"}
+        ref={commentsRef}
         direction={"column"}
-        justify={"space-between"}
+        bg={"whitesmoke"}
         p={"xl"}
-        bd={"1px solid gray"}
-        style={{ borderRadius: "0.5rem" }}
+        bd={"1px solid black"}
+        style={{ borderRadius: "1rem" }}
       >
-        <Flex direction={"column"} gap={"lg"}>
-          <Title className={loadingStyle}>{title}</Title>
-          <Group>
-            <Badge color="green" size="lg">
-              {availabilityStatus}
-            </Badge>
-            <Badge variant="dot" color="green" size="lg">
-              {stock}
-            </Badge>
-          </Group>
-          <Group>
-            <Flex className={styles.section} gap={"xs"}>
-              {tags.map((tag, index) => {
-                return (
-                  <Badge size="xl" variant="light" key={index}>
-                    {tag}
-                  </Badge>
-                );
-              })}
-            </Flex>
-          </Group>
-          <Text size="xl">{description}</Text>
-          <Group>
-            <CreateButton value={`$ ${price}`} size="md" color="teal" />
-            <AddToCartButton id={Number(id)} size="md" />
-          </Group>
-        </Flex>
-        <Flex
-          direction={"column"}
-          p={"xl"}
-          bd={"1px solid darkgray"}
-          bg={"rgb(255, 244, 244)"}
-          style={{ borderRadius: "0.5rem" }}
-        >
-          <Text fw={700}>Additional Product Details</Text>
-          <Flex direction={"column"} p={"xs"}>
-            <List spacing={"xs"}>
-              <List.Item>Product Dimensions</List.Item>
-              <Flex direction={"column"} p={"0 25"}>
-                <Text>Height: {height}</Text>
-                <Text>Width: {width}</Text>
-                <Text>Depth: {depth}</Text>
-              </Flex>
-              <List.Item>{warrantyInformation}</List.Item>
-              <List.Item>{shippingInformation}</List.Item>
-              <List.Item>{returnPolicy}</List.Item>
-            </List>
-          </Flex>
-        </Flex>
+        <Title>Comments</Title>
+        <List>
+          {reviews.map((review, index) => {
+            return (
+              <ListItem key={index}>
+                {review.comment} - {review.reviewerName}
+              </ListItem>
+            );
+          })}
+        </List>
       </Flex>
     </Flex>
   );

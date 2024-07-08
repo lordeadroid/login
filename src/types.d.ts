@@ -59,6 +59,7 @@ export type TProductPage = Omit<TProduct, "id"> & {
   shippingInformation: string;
   warrantyInformation: string;
   returnPolicy: string;
+  reviews: TReview[];
 };
 
 export type TAddToCartButton = {
@@ -71,4 +72,11 @@ export type TButton = {
   size?: string;
   color?: string;
   handleClick?: () => void;
+};
+
+export type TReview = {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
 };

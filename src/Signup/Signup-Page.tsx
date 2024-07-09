@@ -16,6 +16,7 @@ import { signupFormValidator } from "../utils/form-validator";
 import { useEffect } from "react";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import { hashString, userExist } from "../utils/utils";
+import { notifications } from "@mantine/notifications";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
@@ -42,7 +43,10 @@ const SignupPage: TReact = () => {
     const { username, password } = values;
 
     if (userExist(entries, username)) {
-      alert(ERROR.signup);
+      notifications.show({
+        title: "Signup Error",
+        message: ERROR.signup,
+      });
       return;
     }
 
@@ -56,15 +60,15 @@ const SignupPage: TReact = () => {
   return (
     <Flex justify={"center"}>
       <Flex
-         align={"center"}
-         direction={"column"}
-         bg={"white"}
-         p={"xl"}
-         gap={"lg"}
-         style={{
-           boxShadow: "0 0 0.5rem white, 0 0 1rem gray",
-           borderRadius: "0.5rem",
-         }}
+        align={"center"}
+        direction={"column"}
+        bg={"white"}
+        p={"xl"}
+        gap={"lg"}
+        style={{
+          boxShadow: "0 0 0.5rem white, 0 0 1rem gray",
+          borderRadius: "0.5rem",
+        }}
       >
         <Text size="3.5vh" fw={700}>
           Welcome to AntStack

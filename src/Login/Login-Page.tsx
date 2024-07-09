@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import { hashString, isVerifiedUser, userExist } from "../utils/utils";
+import { notifications } from "@mantine/notifications";
 
 const LoginPage: TReact = () => {
   const navigate = useNavigate();
@@ -26,14 +27,20 @@ const LoginPage: TReact = () => {
     const { username, password } = values;
 
     if (!userExist(entries, username)) {
-      alert(ERROR.login.username);
+      notifications.show({
+        title: "Login Error",
+        message: ERROR.login.username,
+      });
       return;
     }
 
     const hashedPassword: string = await hashString(password);
 
     if (!isVerifiedUser(entries, username, hashedPassword)) {
-      alert(ERROR.login.password);
+      notifications.show({
+        title: "Login Error",
+        message: ERROR.login.password,
+      });
       return;
     }
 

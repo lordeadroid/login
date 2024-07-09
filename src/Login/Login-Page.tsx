@@ -1,13 +1,23 @@
 import { Button, Flex, PasswordInput, Text, TextInput } from "@mantine/core";
 import { TLoginFormData, TReact } from "../types";
-import { EMPTYSTRING, ERROR, INITIALLOGINFORM, PATH } from "../utils/constant";
+import {
+  EMPTYSTRING,
+  INITIALLOGINFORM,
+  NOTIFICATION_MSG,
+  NOTIFICATION_TYPE,
+  PATH,
+} from "../utils/constant";
 import { loginFormValidator } from "../utils/form-validator";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
-import { hashString, isVerifiedUser, userExist } from "../utils/utils";
-import { notifications } from "@mantine/notifications";
+import {
+  hashString,
+  isVerifiedUser,
+  notifyUser,
+  userExist,
+} from "../utils/utils";
 
 const LoginPage: TReact = () => {
   const navigate = useNavigate();
@@ -27,23 +37,18 @@ const LoginPage: TReact = () => {
     const { username, password } = values;
 
     if (!userExist(entries, username)) {
-      notifications.show({
-        title: "Login Error",
-        message: ERROR.login.username,
-      });
+      notifyUser(NOTIFICATION_TYPE.login, NOTIFICATION_MSG.login.username);
       return;
     }
 
     const hashedPassword: string = await hashString(password);
 
     if (!isVerifiedUser(entries, username, hashedPassword)) {
-      notifications.show({
-        title: "Login Error",
-        message: ERROR.login.password,
-      });
+      notifyUser(NOTIFICATION_TYPE.login, NOTIFICATION_MSG.login.password);
       return;
     }
 
+    notifyUser(NOTIFICATION_TYPE.login, NOTIFICATION_MSG.login.success);
     updateUsername(username); // add user in login-store
     navigate(PATH.home);
   };

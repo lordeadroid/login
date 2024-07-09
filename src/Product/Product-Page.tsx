@@ -161,7 +161,7 @@ const ProductPage = () => {
             <Text size="xl">{description}</Text>
             <Group>
               <CreateButton value={`$ ${price}`} size="md" color="teal" />
-              <AddToCartButton id={Number(id)} size="md" />
+              <AddToCartButton id={Number(id)} productName={title} size="md" />
             </Group>
           </Flex>
           <Flex

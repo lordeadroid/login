@@ -65,7 +65,7 @@ const HomePage = () => {
                       value={`${rating}`}
                       color={ratingColor(rating)}
                     />
-                    <AddToCartButton id={id} />
+                    <AddToCartButton productName={title} id={id} />
                   </Flex>
                   <Card.Section className={styles.section}>
                     {tags.map((tag, index) => {

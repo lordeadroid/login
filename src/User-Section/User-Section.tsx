@@ -1,15 +1,22 @@
 import { Button, Flex, Image, Text } from "@mantine/core";
 import { useNavigate, NavigateFunction } from "react-router-dom";
-import { EMPTYSTRING, PATH } from "../utils/constant";
+import {
+  EMPTYSTRING,
+  NOTIFICATION_MSG,
+  NOTIFICATION_TYPE,
+  PATH,
+} from "../utils/constant";
 import { TReact, TSignupFormData } from "../types";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import cartIcon from "../assets/cart.png";
+import { notifyUser } from "../utils/utils";
 
 const LogoutButton: TReact = () => {
   const resetUsername = useLoginStore((state) => state.resetUsername);
   const navigate: NavigateFunction = useNavigate();
 
   const handleLogout = (): void => {
+    notifyUser(NOTIFICATION_TYPE.logout, NOTIFICATION_MSG.logout.success);
     resetUsername();
     navigate(PATH.login);
   };

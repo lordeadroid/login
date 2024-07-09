@@ -1,3 +1,4 @@
+import { notifications } from "@mantine/notifications";
 import { TSignupFormData, TUserExist, TVerifiedUser } from "../types";
 import { LOCALSTORAGE, RATING } from "./constant";
 
@@ -34,4 +35,11 @@ export const ratingColor = (rating: number): string => {
   if (rating >= 4) return RATING.good;
   if (rating >= 3) return RATING.okay;
   return RATING.poor;
+};
+
+export const notifyUser = (title: string, message: string) => {
+  notifications.show({
+    title,
+    message,
+  });
 };

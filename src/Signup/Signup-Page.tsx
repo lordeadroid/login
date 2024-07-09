@@ -9,14 +9,19 @@ import {
   TextInput,
 } from "@mantine/core";
 import { THandleSubmit, TReact, TSignupFormData } from "../types";
-import { EMPTYSTRING, ERROR, INITIALSIGNUPFORM, PATH } from "../utils/constant";
+import {
+  EMPTYSTRING,
+  INITIALSIGNUPFORM,
+  NOTIFICATION_MSG,
+  NOTIFICATION_TYPE,
+  PATH,
+} from "../utils/constant";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import { Link, useNavigate } from "react-router-dom";
 import { signupFormValidator } from "../utils/form-validator";
 import { useEffect } from "react";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
-import { hashString, userExist } from "../utils/utils";
-import { notifications } from "@mantine/notifications";
+import { hashString, notifyUser, userExist } from "../utils/utils";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
@@ -43,15 +48,13 @@ const SignupPage: TReact = () => {
     const { username, password } = values;
 
     if (userExist(entries, username)) {
-      notifications.show({
-        title: "Signup Error",
-        message: ERROR.signup,
-      });
+      notifyUser(NOTIFICATION_TYPE.signup, NOTIFICATION_MSG.signup.username);
       return;
     }
 
     values.password = await hashString(password);
 
+    notifyUser(NOTIFICATION_TYPE.signup, NOTIFICATION_MSG.signup.success);
     updateUsername(username); // add user in login-store
     addEntry(values); // add user in db-store
     navigate(PATH.home);

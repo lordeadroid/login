@@ -47,11 +47,27 @@ export const STORE = {
   login: "loginStore",
 };
 
-export const ERROR = {
-  signup: "Username is already taken",
+export const NOTIFICATION_TYPE = {
+  login: "Login",
+  signup: "Signup",
+  logout: "Logout",
+};
+
+export const NOTIFICATION_MSG = {
   login: {
     username: "User does not exists",
     password: "Wrong Password",
+    success: "Logged In Succesfully",
+  },
+  signup: {
+    username: "Username is already taken",
+    success: "Account Created Succesfully",
+  },
+  logout: {
+    success: "Logged Out Succesfully",
+  },
+  cart: {
+    success: "Added to cart",
   },
 };
 

@@ -1,31 +1,58 @@
+import axios from "axios";
+import styles from "../style.module.css";
+import Comment from "../Comment/Comment";
+import { TProductPage, TReview } from "../types";
+import { useParams } from "react-router-dom";
+import { ratingColor } from "../utils/utils";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { AddToCartButton, CreateButton } from "../Lib";
+import { EMPTYSTRING, INITIALPRODUCTDATA } from "../utils/constant";
 import {
   Badge,
-  Box,
   Flex,
   Group,
   Image,
   List,
   ListItem,
+  Skeleton,
   Text,
   Title,
 } from "@mantine/core";
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { TProductPage } from "../types";
-import styles from "../style.module.css";
-import { EMPTYSTRING, INITIALPRODUCTDATA } from "../utils/constant";
-import { AddToCartButton, CreateButton } from "../Lib";
-import { ratingColor } from "../utils/utils";
-import Comment from "../Comment/Comment";
+
+const CommentSection = (props: {
+  commentsRef: MutableRefObject<HTMLDivElement | null>;
+  reviews: TReview[];
+}) => {
+  const { commentsRef, reviews } = props;
+  return (
+    <Flex
+      ref={commentsRef}
+      direction={"column"}
+      bg={"whitesmoke"}
+      p={"xl"}
+      bd={"1px solid black"}
+      style={{ borderRadius: "1rem" }}
+    >
+      <Title pb={"2rem"}>Comments</Title>
+      <Flex wrap={"wrap"} gap={"md"}>
+        {reviews.map((review, index) => (
+          <Comment key={index} review={review} />
+        ))}
+      </Flex>
+    </Flex>
+  );
+};
 
 const ProductPage = () => {
   const { id } = useParams();
   const url = `https://dummyjson.com/products/${id}`;
+  const commentsRef = useRef<HTMLDivElement | null>(null);
   const [selectedImg, setSelectedImg] = useState<number>(0);
   const [isFetching, setFetching] = useState<boolean>(true);
   const [productData, setProductData] =
     useState<TProductPage>(INITIALPRODUCTDATA);
+
+  const loadingStyle = isFetching ? styles.skeletonLoading : EMPTYSTRING;
 
   const {
     tags,
@@ -43,8 +70,6 @@ const ProductPage = () => {
     warrantyInformation,
   } = productData;
   const { height, width, depth } = dimensions;
-  const loadingStyle = isFetching ? styles.skeletonLoading : EMPTYSTRING;
-  const commentsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     axios.get(url).then(({ data }) => {
@@ -61,21 +86,23 @@ const ProductPage = () => {
             {images.map((imgUrl, index) => {
               const isSelectedImg = selectedImg === index;
               return (
-                <Flex
-                  h={"15rem"}
-                  w={"10rem"}
-                  onClick={() => setSelectedImg(index)}
-                  key={index}
-                >
-                  <Image
-                    src={imgUrl}
-                    radius={"sm"}
-                    bg={isSelectedImg ? "white" : "whitesmoke"}
-                    bd={
-                      isSelectedImg ? "1px solid black" : "1px solid darkgray"
-                    }
-                  />
-                </Flex>
+                <Skeleton visible={isFetching}>
+                  <Flex
+                    h={"15rem"}
+                    w={"10rem"}
+                    onClick={() => setSelectedImg(index)}
+                    key={index}
+                  >
+                    <Image
+                      src={imgUrl}
+                      radius={"sm"}
+                      bg={isSelectedImg ? "white" : "whitesmoke"}
+                      bd={
+                        isSelectedImg ? "1px solid black" : "1px solid darkgray"
+                      }
+                    />
+                  </Flex>
+                </Skeleton>
               );
             })}
           </Flex>
@@ -85,7 +112,7 @@ const ProductPage = () => {
             className={loadingStyle}
             bd={"1px solid gray"}
           >
-            <Box pos={"absolute"} left={8} top={8}>
+            <Flex pos={"absolute"} left={8} top={8} style={{ zIndex: 1 }}>
               <CreateButton
                 value={`${rating}`}
                 size="sm"
@@ -94,10 +121,12 @@ const ProductPage = () => {
                 }}
                 color={ratingColor(rating)}
               />
-            </Box>
-            <Flex h={"47rem"} w={"40rem"}>
-              <Image src={images[selectedImg]} />
             </Flex>
+            <Skeleton visible={isFetching}>
+              <Flex h={"47rem"} w={"40rem"}>
+                <Image src={images[selectedImg]} />
+              </Flex>
+            </Skeleton>
           </Flex>
         </Flex>
         <Flex
@@ -159,21 +188,7 @@ const ProductPage = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex
-        ref={commentsRef}
-        direction={"column"}
-        bg={"whitesmoke"}
-        p={"xl"}
-        bd={"1px solid black"}
-        style={{ borderRadius: "1rem" }}
-      >
-        <Title pb={"2rem"}>Comments</Title>
-        <Flex wrap={"wrap"} gap={'md'}>
-          {reviews.map((review, index) => (
-            <Comment key={index} review={review} />
-          ))}
-        </Flex>
-      </Flex>
+      <CommentSection commentsRef={commentsRef} reviews={reviews} />
     </Flex>
   );
 };

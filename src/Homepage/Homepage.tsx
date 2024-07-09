@@ -32,7 +32,7 @@ const HomePage = () => {
     axios.get(url).then(({ data }) => {
       const { products } = data;
       setProductsData(products);
-      setLoading(!isLoading);
+      setLoading(false);
     });
   }, [navigate, username, isLoading]);
 

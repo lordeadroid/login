@@ -1,5 +1,24 @@
-import { Button, Flex, PasswordInput, Text, TextInput } from "@mantine/core";
+import backgroundImage from "../assets/background.avif";
+import { useEffect } from "react";
 import { TLoginFormData, TReact } from "../types";
+import { Link, useNavigate } from "react-router-dom";
+import { UseFormReturnType, useForm } from "@mantine/form";
+import { loginFormValidator } from "../utils/form-validator";
+import { useDatabaseStore, useLoginStore } from "../utils/use-store";
+import {
+  Button,
+  Flex,
+  Image,
+  PasswordInput,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import {
+  hashString,
+  isVerifiedUser,
+  notifyUser,
+  userExist,
+} from "../utils/utils";
 import {
   EMPTYSTRING,
   INITIALLOGINFORM,
@@ -7,25 +26,12 @@ import {
   NOTIFICATION_TYPE,
   PATH,
 } from "../utils/constant";
-import { loginFormValidator } from "../utils/form-validator";
-import { UseFormReturnType, useForm } from "@mantine/form";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useDatabaseStore, useLoginStore } from "../utils/use-store";
-import {
-  hashString,
-  isVerifiedUser,
-  notifyUser,
-  userExist,
-} from "../utils/utils";
 
 const LoginPage: TReact = () => {
   const navigate = useNavigate();
-
+  const entries = useDatabaseStore((state) => state.entries);
   const username = useLoginStore((state) => state.username);
   const updateUsername = useLoginStore((state) => state.updateUsername);
-
-  const entries = useDatabaseStore((state) => state.entries);
 
   useEffect(() => {
     if (username !== EMPTYSTRING) {
@@ -42,7 +48,6 @@ const LoginPage: TReact = () => {
     }
 
     const hashedPassword: string = await hashString(password);
-
     if (!isVerifiedUser(entries, username, hashedPassword)) {
       notifyUser(NOTIFICATION_TYPE.login, NOTIFICATION_MSG.login.password);
       return;
@@ -60,56 +65,42 @@ const LoginPage: TReact = () => {
   });
 
   return (
-    <Flex justify={"center"}>
-      <Flex
-        align={"center"}
-        direction={"column"}
-        bg={"white"}
-        p={"xl"}
-        gap={"lg"}
-        style={{
-          boxShadow: "0 0 0.5rem white, 0 0 1rem gray",
-          borderRadius: "0.5rem",
-        }}
-      >
-        <Text size="3.5vh" fw={700}>
+    <Flex gap={"xl"}>
+      <Flex direction={"column"} gap={"4rem"} align={"center"} p={"xl"}>
+        <Text size="2rem" fw={700}>
           Welcome to AntStack
         </Text>
-
-        <Flex gap={"xs"}>
-          <Text>Don't have an account?</Text>
-          <Link to={PATH.signup}>Signup</Link>
-        </Flex>
 
         <form
           onSubmit={form.onSubmit(handleSubmit)}
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "4vh",
+            gap: "3rem",
           }}
         >
-          <Flex direction={"column"} gap={"lg"} p={"lg"}>
+          <Flex direction={"column"} gap={"lg"}>
             <TextInput
-              size="lg"
-              label="Username"
+              size="md"
+              w={"20rem"}
               placeholder="username"
               {...form.getInputProps("username")}
             />
             <PasswordInput
-              size="lg"
-              label="Password"
+              size="md"
               placeholder="password"
               {...form.getInputProps("password")}
             />
           </Flex>
-          <Button type="submit" size="lg">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </form>
+
+        <Flex gap={"xs"}>
+          <Text>Don't have an account?</Text>
+          <Link to={PATH.signup}>Signup</Link>
+        </Flex>
       </Flex>
+      <Image src={backgroundImage} />
     </Flex>
   );
 };

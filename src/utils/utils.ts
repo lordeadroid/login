@@ -41,5 +41,7 @@ export const notifyUser = (title: string, message: string) => {
   notifications.show({
     title,
     message,
+    autoClose: 2000,
+    position: "top-center",
   });
 };

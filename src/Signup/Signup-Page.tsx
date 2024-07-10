@@ -110,7 +110,7 @@ const SignupPage: TReact = () => {
               </Group>
             </RadioGroup>
           </Flex>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" size="lg">Submit</Button>
         </form>
 
         <Flex gap={"xs"}>

@@ -92,7 +92,7 @@ const LoginPage: TReact = () => {
               {...form.getInputProps("password")}
             />
           </Flex>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" size="lg">Submit</Button>
         </form>
 
         <Flex gap={"xs"}>

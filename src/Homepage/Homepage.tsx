@@ -42,14 +42,8 @@ const HomePage = () => {
         {productsData.map((product) => {
           const { id, title, price, rating, tags, thumbnail } = product;
           return (
-            <Skeleton w={"20rem"} visible={isLoading}>
-              <Card
-                radius="md"
-                className={styles.card}
-                key={id}
-                w="20rem"
-                withBorder
-              >
+            <Skeleton w={"20rem"} visible={isLoading} key={id}>
+              <Card withBorder className={styles.card} radius="md" w="20rem">
                 <Flex
                   justify="space-between"
                   direction="column"

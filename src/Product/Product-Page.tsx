@@ -86,12 +86,11 @@ const ProductPage = () => {
             {images.map((imgUrl, index) => {
               const isSelectedImg = selectedImg === index;
               return (
-                <Skeleton visible={isFetching}>
+                <Skeleton visible={isFetching} key={index}>
                   <Flex
                     h={"15rem"}
                     w={"10rem"}
                     onClick={() => setSelectedImg(index)}
-                    key={index}
                   >
                     <Image
                       src={imgUrl}

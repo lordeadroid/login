@@ -1,16 +1,17 @@
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
-import { Flex, MantineProvider } from "@mantine/core";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import NavigationBar from "./Navigation-Bar/Navigation-Bar";
-import SignupPage from "./Signup/Signup-Page";
-import { TReact } from "./types";
+import theme from "./theme";
+import CartPage from "./Cart/Cart-Page";
+import ErrorPage from "./Error/Error-Page";
 import LoginPage from "./Login/Login-Page";
 import HomePage from "./Homepage/Homepage";
+import SignupPage from "./Signup/Signup-Page";
 import ProductPage from "./Product/Product-Page";
-import ErrorPage from "./Error/Error-Page";
-import CartPage from "./Cart/Cart-Page";
+import NavigationBar from "./Navigation-Bar/Navigation-Bar";
+import { TReact } from "./types";
+import { Flex, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // fixed nav-bar component in all pages
 const Layout: TReact = () => {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
 
 const App: TReact = () => {
   return (
-    <MantineProvider>
+    <MantineProvider theme={theme}>
       <Notifications />
       <RouterProvider router={router} />
     </MantineProvider>

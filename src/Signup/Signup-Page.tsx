@@ -63,9 +63,9 @@ const SignupPage: TReact = () => {
   };
 
   return (
-    <Flex gap={"xl"}>
+    <Flex gap={"lg"}>
       <Flex direction={"column"} gap={"4rem"} align={"center"} p={"xl"}>
-        <Text size="3.5vh" fw={700}>
+        <Text size="2.5rem" fw={700}>
           Welcome to AntStack
         </Text>
 
@@ -74,6 +74,8 @@ const SignupPage: TReact = () => {
           style={{
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
             gap: "3rem",
           }}
         >
@@ -110,7 +112,9 @@ const SignupPage: TReact = () => {
               </Group>
             </RadioGroup>
           </Flex>
-          <Button type="submit" size="lg">Submit</Button>
+          <Button type="submit" size="md" w={"8rem"}>
+            Submit
+          </Button>
         </form>
 
         <Flex gap={"xs"}>

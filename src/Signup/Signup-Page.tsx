@@ -1,14 +1,11 @@
-import {
-  Button,
-  Flex,
-  Group,
-  PasswordInput,
-  Radio,
-  RadioGroup,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import backgroundImage from "../assets/background.avif";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UseFormReturnType, useForm } from "@mantine/form";
+import { signupFormValidator } from "../utils/form-validator";
 import { THandleSubmit, TReact, TSignupFormData } from "../types";
+import { hashString, notifyUser, userExist } from "../utils/utils";
+import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import {
   EMPTYSTRING,
   INITIALSIGNUPFORM,
@@ -16,12 +13,17 @@ import {
   NOTIFICATION_TYPE,
   PATH,
 } from "../utils/constant";
-import { UseFormReturnType, useForm } from "@mantine/form";
-import { Link, useNavigate } from "react-router-dom";
-import { signupFormValidator } from "../utils/form-validator";
-import { useEffect } from "react";
-import { useDatabaseStore, useLoginStore } from "../utils/use-store";
-import { hashString, notifyUser, userExist } from "../utils/utils";
+import {
+  Button,
+  Flex,
+  Group,
+  Image,
+  PasswordInput,
+  Radio,
+  RadioGroup,
+  Text,
+  TextInput,
+} from "@mantine/core";
 
 const SignupPage: TReact = () => {
   const navigate = useNavigate();
@@ -61,59 +63,39 @@ const SignupPage: TReact = () => {
   };
 
   return (
-    <Flex justify={"center"}>
-      <Flex
-        align={"center"}
-        direction={"column"}
-        bg={"white"}
-        p={"xl"}
-        gap={"lg"}
-        style={{
-          boxShadow: "0 0 0.5rem white, 0 0 1rem gray",
-          borderRadius: "0.5rem",
-        }}
-      >
+    <Flex gap={"xl"}>
+      <Flex direction={"column"} gap={"4rem"} align={"center"} p={"xl"}>
         <Text size="3.5vh" fw={700}>
           Welcome to AntStack
         </Text>
-
-        <Flex gap={"xs"}>
-          <Text>Already have an account?</Text>
-          <Link to={PATH.login}>Login</Link>
-        </Flex>
 
         <form
           onSubmit={form.onSubmit(handleSubmit)}
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "4vh",
+            gap: "3rem",
           }}
         >
-          <Flex direction={"column"} gap={"lg"} p={"lg"}>
+          <Flex direction={"column"} gap={"lg"}>
             <TextInput
-              size="lg"
-              label="Username"
+              size="md"
+              w={"24rem"}
               placeholder="username"
               {...form.getInputProps("username")}
             />
             <TextInput
-              size="lg"
-              label="Email"
+              size="md"
               placeholder="email"
               {...form.getInputProps("email")}
             />
             <TextInput
-              size="lg"
-              label="Number"
+              size="md"
               placeholder="number (optional)"
               {...form.getInputProps("number")}
             />
             <PasswordInput
-              size="lg"
-              label="Password"
+              size="md"
               placeholder="password"
               {...form.getInputProps("password")}
             />
@@ -128,11 +110,15 @@ const SignupPage: TReact = () => {
               </Group>
             </RadioGroup>
           </Flex>
-          <Button type="submit" size="lg">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </form>
+
+        <Flex gap={"xs"}>
+          <Text>Already have an account?</Text>
+          <Link to={PATH.login}>Login</Link>
+        </Flex>
       </Flex>
+      <Image src={backgroundImage} />
     </Flex>
   );
 };

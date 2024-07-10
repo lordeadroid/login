@@ -82,7 +82,7 @@ const LoginPage: TReact = () => {
           <Flex direction={"column"} gap={"lg"}>
             <TextInput
               size="md"
-              w={"20rem"}
+              w={"24rem"}
               placeholder="username"
               {...form.getInputProps("username")}
             />

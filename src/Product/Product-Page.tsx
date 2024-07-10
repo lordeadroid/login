@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { ratingColor } from "../utils/utils";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { AddToCartButton, CreateButton } from "../Lib";
-import { EMPTYSTRING, INITIALPRODUCTDATA } from "../utils/constant";
+import { EMPTYSTRING, INITIALPRODUCTDATA, SIZE } from "../utils/constant";
 import {
   Badge,
   Flex,
@@ -29,12 +29,12 @@ const CommentSection = (props: {
       ref={commentsRef}
       direction={"column"}
       bg={"whitesmoke"}
-      p={"xl"}
+      p={SIZE.extraLarge}
       bd={"1px solid black"}
       style={{ borderRadius: "1rem" }}
     >
       <Title pb={"2rem"}>Comments</Title>
-      <Flex wrap={"wrap"} gap={"md"}>
+      <Flex wrap={"wrap"} gap={SIZE.medium}>
         {reviews.map((review, index) => (
           <Comment key={index} review={review} />
         ))}
@@ -79,9 +79,9 @@ const ProductPage = () => {
   }, [url]);
 
   return (
-    <Flex gap={"xl"} direction={"column"}>
-      <Flex gap={"xl"}>
-        <Flex gap={"md"}>
+    <Flex gap={SIZE.extraLarge} direction={"column"}>
+      <Flex gap={SIZE.extraLarge}>
+        <Flex gap={SIZE.medium}>
           <Flex direction={"column"} gap={"1rem"}>
             {images.map((imgUrl, index) => {
               const isSelectedImg = selectedImg === index;
@@ -95,7 +95,7 @@ const ProductPage = () => {
                     <Image
                       alt={`Image of ${title}`}
                       src={imgUrl}
-                      radius={"sm"}
+                      radius={SIZE.small}
                       bg={isSelectedImg ? "white" : "whitesmoke"}
                       bd={
                         isSelectedImg ? "1px solid black" : "1px solid darkgray"
@@ -115,7 +115,7 @@ const ProductPage = () => {
             <Flex pos={"absolute"} left={8} top={8} style={{ zIndex: 1 }}>
               <CreateButton
                 value={`${rating}`}
-                size="sm"
+                size={SIZE.small}
                 handleClick={() => {
                   commentsRef.current?.scrollIntoView({ behavior: "smooth" });
                 }}
@@ -130,50 +130,58 @@ const ProductPage = () => {
           </Flex>
         </Flex>
         <Flex
-          gap={"lg"}
+          gap={SIZE.large}
           direction={"column"}
           justify={"space-between"}
-          p={"xl"}
+          p={SIZE.extraLarge}
           bd={"1px solid gray"}
           style={{ borderRadius: "0.5rem" }}
         >
-          <Flex direction={"column"} gap={"lg"}>
+          <Flex direction={"column"} gap={SIZE.large}>
             <Title className={loadingStyle}>{title}</Title>
             <Group>
-              <Badge color="green" size="lg">
+              <Badge color="green" size={SIZE.large}>
                 {availabilityStatus}
               </Badge>
-              <Badge variant="dot" color="green" size="lg">
+              <Badge variant="dot" color="green" size={SIZE.large}>
                 {stock}
               </Badge>
             </Group>
             <Group>
-              <Flex className={styles.section} gap={"xs"}>
+              <Flex className={styles.section} gap={SIZE.extraSmall}>
                 {tags.map((tag, index) => {
                   return (
-                    <Badge size="xl" variant="light" key={index}>
+                    <Badge size={SIZE.extraLarge} variant="light" key={index}>
                       {tag}
                     </Badge>
                   );
                 })}
               </Flex>
             </Group>
-            <Text size="xl">{description}</Text>
+            <Text size={SIZE.extraLarge}>{description}</Text>
             <Group>
-              <CreateButton value={`$ ${price}`} size="md" color="teal" />
-              <AddToCartButton id={Number(id)} productName={title} size="md" />
+              <CreateButton
+                value={`$ ${price}`}
+                size={SIZE.medium}
+                color="teal"
+              />
+              <AddToCartButton
+                id={Number(id)}
+                productName={title}
+                size={SIZE.medium}
+              />
             </Group>
           </Flex>
           <Flex
             direction={"column"}
-            p={"xl"}
+            p={SIZE.extraLarge}
             bd={"1px solid darkgray"}
             bg={"rgb(255, 244, 244)"}
             style={{ borderRadius: "0.5rem" }}
           >
             <Text fw={700}>Additional Product Details</Text>
-            <Flex direction={"column"} p={"xs"}>
-              <List spacing={"xs"}>
+            <Flex direction={"column"} p={SIZE.extraSmall}>
+              <List spacing={SIZE.extraSmall}>
                 <ListItem>Product Dimensions</ListItem>
                 <Flex direction={"column"} p={"0 25"}>
                   <Text>Height: {height}</Text>

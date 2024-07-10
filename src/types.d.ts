@@ -18,8 +18,6 @@ export type TValidateFormEntry = (value: string) => string | null;
 
 export type TValidatorFn = (value: string) => boolean;
 
-export type TReact = () => React.JSX.Element;
-
 export type TDatabaseStore = {
   entries: TSignupFormData[];
   addEntry: (newEntry: TSignupFormData) => void;

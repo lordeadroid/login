@@ -1,6 +1,6 @@
 import backgroundImage from "../assets/background.avif";
 import { useEffect } from "react";
-import { TLoginFormData, TReact } from "../types";
+import { TLoginFormData } from "../types";
 import { Link, useNavigate } from "react-router-dom";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import { loginFormValidator } from "../utils/form-validator";
@@ -25,9 +25,10 @@ import {
   NOTIFICATION_MSG,
   NOTIFICATION_TYPE,
   PATH,
+  SIZE,
 } from "../utils/constant";
 
-const LoginPage: TReact = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const entries = useDatabaseStore((state) => state.entries);
   const username = useLoginStore((state) => state.username);
@@ -65,8 +66,13 @@ const LoginPage: TReact = () => {
   });
 
   return (
-    <Flex gap={"lg"}>
-      <Flex direction={"column"} gap={"4rem"} align={"center"} p={"xl"}>
+    <Flex gap={SIZE.large}>
+      <Flex
+        direction={"column"}
+        gap={"4rem"}
+        align={"center"}
+        p={SIZE.extraLarge}
+      >
         <Text size="2.5rem" fw={700}>
           Welcome to AntStack
         </Text>
@@ -81,25 +87,25 @@ const LoginPage: TReact = () => {
             gap: "3rem",
           }}
         >
-          <Flex direction={"column"} gap={"lg"}>
+          <Flex direction={"column"} gap={SIZE.large}>
             <TextInput
-              size="md"
+              size={SIZE.medium}
               w={"24rem"}
               placeholder="username"
               {...form.getInputProps("username")}
             />
             <PasswordInput
-              size="md"
+              size={SIZE.medium}
               placeholder="password"
               {...form.getInputProps("password")}
             />
           </Flex>
-          <Button type="submit" size="md" w={"8rem"}>
+          <Button type="submit" size={SIZE.medium} w={"8rem"}>
             Submit
           </Button>
         </form>
 
-        <Flex gap={"xs"}>
+        <Flex gap={SIZE.extraSmall}>
           <Text>Don't have an account?</Text>
           <Link to={PATH.signup}>Signup</Link>
         </Flex>

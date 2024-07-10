@@ -5,18 +5,18 @@ import { useEffect, useState } from "react";
 import { ratingColor } from "../utils/utils";
 import { useLoginStore } from "../utils/use-store";
 import { Link, useNavigate } from "react-router-dom";
-import { EMPTYSTRING, PATH } from "../utils/constant";
 import { AddToCartButton, CreateButton } from "../Lib";
+import { EMPTYSTRING, PATH, SIZE } from "../utils/constant";
 import { Badge, Card, Flex, Image, Skeleton, Text } from "@mantine/core";
 
 const CreateCard = ({ productData }: { productData: TProduct }) => {
   const { id, title, price, rating, tags, thumbnail } = productData;
 
   return (
-    <Card withBorder className={styles.card} radius="md" w="20rem">
+    <Card withBorder className={styles.card} radius={SIZE.medium} w="20rem">
       <Flex justify="space-between" direction="column" pos="relative" h="30rem">
         <Image src={thumbnail} alt={`Image of ${title}`} />
-        <Text fz={"lg"} fw={600}>
+        <Text fz={SIZE.large} fw={600}>
           {title}
         </Text>
         <Flex w={"100%"} pos={"absolute"} justify={"space-between"}>
@@ -32,11 +32,16 @@ const CreateCard = ({ productData }: { productData: TProduct }) => {
             );
           })}
         </Card.Section>
-        <Flex gap={"xs"}>
+        <Flex gap={SIZE.extraSmall}>
           <Link to={`products/${id}`}>
-            <CreateButton value="More Details" w="11rem" size="sm" />
+            <CreateButton value="More Details" w="11rem" size={SIZE.small} />
           </Link>
-          <CreateButton value={`$${price}`} color="teal" w="6rem" size="sm" />
+          <CreateButton
+            value={`$${price}`}
+            color="teal"
+            w="6rem"
+            size={SIZE.small}
+          />
         </Flex>
       </Flex>
     </Card>

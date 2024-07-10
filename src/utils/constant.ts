@@ -100,3 +100,11 @@ export const INITIALPRODUCTDATA = {
     },
   ],
 };
+
+export const SIZE = {
+  extraLarge: "lg",
+  extraSmall: "xs",
+  large: "lg",
+  medium: "md",
+  small: "sm",
+};

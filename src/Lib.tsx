@@ -1,11 +1,17 @@
 import { notifyUser } from "./utils/utils";
 import { Avatar, Button } from "@mantine/core";
-import { EMPTYSTRING, NOTIFICATION_MSG } from "./utils/constant";
+import { EMPTYSTRING, NOTIFICATION_MSG, SIZE } from "./utils/constant";
 import { useDatabaseStore, useLoginStore } from "./utils/use-store";
 import { TAddToCartButton, TButton, TSignupFormData } from "./types";
 
 export const CreateButton = (props: TButton) => {
-  const { value, color, handleClick, size = "xs", w = EMPTYSTRING } = props;
+  const {
+    value,
+    color,
+    handleClick,
+    w = EMPTYSTRING,
+    size = SIZE.extraSmall,
+  } = props;
 
   return (
     <Button size={size} color={color} w={w} onClick={handleClick}>
@@ -15,7 +21,7 @@ export const CreateButton = (props: TButton) => {
 };
 
 export const AddToCartButton = (props: TAddToCartButton) => {
-  const { productName, id, size = "xs" } = props;
+  const { productName, id, size = SIZE.extraSmall } = props;
   const username = useLoginStore((state) => state.username);
   const entries = useDatabaseStore((state) => state.entries);
   const addItemToCart = useDatabaseStore((state) => state.addItemToCart);
@@ -47,5 +53,5 @@ export const CreateAvatar = () => {
   // eslint-disable-next-line max-len
   const avatarURL = `https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-${avatarId}.png`;
 
-  return <Avatar src={avatarURL} radius="xl" />;
+  return <Avatar src={avatarURL} radius={SIZE.extraLarge} />;
 };

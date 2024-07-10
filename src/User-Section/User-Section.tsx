@@ -10,6 +10,7 @@ import {
   NOTIFICATION_MSG,
   NOTIFICATION_TYPE,
   PATH,
+  SIZE,
 } from "../utils/constant";
 
 const LogoutButton = () => {
@@ -22,7 +23,9 @@ const LogoutButton = () => {
     navigate(PATH.login);
   };
 
-  return <CreateButton value="Logout" size="lg" handleClick={handleLogout} />;
+  return (
+    <CreateButton value="Logout" size={SIZE.large} handleClick={handleLogout} />
+  );
 };
 
 const LoginButton = () => {
@@ -32,7 +35,9 @@ const LoginButton = () => {
     navigate(PATH.login);
   };
 
-  return <CreateButton value="Login" size="lg" handleClick={handleLogin} />;
+  return (
+    <CreateButton value="Login" size={SIZE.large} handleClick={handleLogin} />
+  );
 };
 
 const ProfileButton = () => {
@@ -46,7 +51,7 @@ const ProfileButton = () => {
       bg="white"
     >
       <CreateAvatar />
-      <Text size="xl" fs="italic">
+      <Text size={SIZE.extraLarge} fs="italic">
         {username}
       </Text>
     </Group>
@@ -63,9 +68,9 @@ const CartDetails = () => {
   return (
     <Flex
       align={"center"}
-      gap={"xs"}
+      gap={SIZE.extraSmall}
       bg={"indigo"}
-      p={"xs"}
+      p={SIZE.extraSmall}
       style={{ borderRadius: "0.5rem" }}
     >
       <Image src={cartIcon} h={30} alt="image of cart" />
@@ -76,7 +81,7 @@ const CartDetails = () => {
 
 const Profile = () => {
   return (
-    <Flex gap="md" align="center" justify={"center"}>
+    <Flex gap={SIZE.medium} align="center" justify={"center"}>
       <ProfileButton />
       <CartDetails />
       <LogoutButton />

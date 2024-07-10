@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UseFormReturnType, useForm } from "@mantine/form";
 import { signupFormValidator } from "../utils/form-validator";
-import { THandleSubmit, TReact, TSignupFormData } from "../types";
+import { THandleSubmit, TSignupFormData } from "../types";
 import { hashString, notifyUser, userExist } from "../utils/utils";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import {
@@ -12,6 +12,7 @@ import {
   NOTIFICATION_MSG,
   NOTIFICATION_TYPE,
   PATH,
+  SIZE,
 } from "../utils/constant";
 import {
   Button,
@@ -25,7 +26,7 @@ import {
   TextInput,
 } from "@mantine/core";
 
-const SignupPage: TReact = () => {
+const SignupPage = () => {
   const navigate = useNavigate();
 
   const username = useLoginStore((state) => state.username);
@@ -63,8 +64,13 @@ const SignupPage: TReact = () => {
   };
 
   return (
-    <Flex gap={"lg"}>
-      <Flex direction={"column"} gap={"4rem"} align={"center"} p={"xl"}>
+    <Flex gap={SIZE.large}>
+      <Flex
+        direction={"column"}
+        gap={"4rem"}
+        align={"center"}
+        p={SIZE.extraLarge}
+      >
         <Text size="2.5rem" fw={700}>
           Welcome to AntStack
         </Text>
@@ -79,30 +85,29 @@ const SignupPage: TReact = () => {
             gap: "3rem",
           }}
         >
-          <Flex direction={"column"} gap={"lg"}>
+          <Flex direction={"column"} gap={SIZE.large}>
             <TextInput
-              size="md"
+              size={SIZE.medium}
               w={"24rem"}
               placeholder="username"
               {...form.getInputProps("username")}
             />
             <TextInput
-              size="md"
+              size={SIZE.medium}
               placeholder="email"
               {...form.getInputProps("email")}
             />
             <TextInput
-              size="md"
+              size={SIZE.medium}
               placeholder="number (optional)"
               {...form.getInputProps("number")}
             />
             <PasswordInput
-              size="md"
+              size={SIZE.medium}
               placeholder="password"
               {...form.getInputProps("password")}
             />
             <RadioGroup
-              size="md"
               label="Nationality"
               {...form.getInputProps("nationality")}
             >
@@ -112,12 +117,12 @@ const SignupPage: TReact = () => {
               </Group>
             </RadioGroup>
           </Flex>
-          <Button type="submit" size="md" w={"8rem"}>
+          <Button type="submit" size={SIZE.medium} w={"8rem"}>
             Submit
           </Button>
         </form>
 
-        <Flex gap={"xs"}>
+        <Flex gap={SIZE.extraSmall}>
           <Text>Already have an account?</Text>
           <Link to={PATH.login}>Login</Link>
         </Flex>

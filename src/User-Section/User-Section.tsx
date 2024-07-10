@@ -1,8 +1,8 @@
 import cartIcon from "../assets/cart.png";
-import { CreateAvatar } from "../Lib";
+import { TSignupFormData } from "../types";
 import { notifyUser } from "../utils/utils";
-import { TReact, TSignupFormData } from "../types";
-import { Button, Flex, Group, Image, Text } from "@mantine/core";
+import { CreateAvatar, CreateButton } from "../Lib";
+import { Flex, Group, Image, Text } from "@mantine/core";
 import { useNavigate, NavigateFunction } from "react-router-dom";
 import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import {
@@ -12,9 +12,9 @@ import {
   PATH,
 } from "../utils/constant";
 
-const LogoutButton: TReact = () => {
-  const resetUsername = useLoginStore((state) => state.resetUsername);
+const LogoutButton = () => {
   const navigate: NavigateFunction = useNavigate();
+  const resetUsername = useLoginStore((state) => state.resetUsername);
 
   const handleLogout = (): void => {
     notifyUser(NOTIFICATION_TYPE.logout, NOTIFICATION_MSG.logout.success);
@@ -22,28 +22,39 @@ const LogoutButton: TReact = () => {
     navigate(PATH.login);
   };
 
-  return (
-    <Button size="lg" onClick={handleLogout}>
-      Logout
-    </Button>
-  );
+  return <CreateButton value="Logout" size="lg" handleClick={handleLogout} />;
 };
 
-const LoginButton: TReact = () => {
+const LoginButton = () => {
   const navigate: NavigateFunction = useNavigate();
 
   const handleLogin = (): void => {
     navigate(PATH.login);
   };
 
+  return <CreateButton value="Login" size="lg" handleClick={handleLogin} />;
+};
+
+const ProfileButton = () => {
+  const username = useLoginStore((state) => state.username);
+
   return (
-    <Button size="lg" onClick={handleLogin}>
-      Login
-    </Button>
+    <Group
+      bd="1px solid darkgray"
+      style={{ borderRadius: "2rem" }}
+      p="0.5rem 0.75rem"
+      bg="white"
+    >
+      <CreateAvatar />
+      <Text size="xl" fs="italic">
+        {username}
+      </Text>
+    </Group>
   );
 };
 
-const CartDetails = ({ username }: { username: string }) => {
+const CartDetails = () => {
+  const username = useLoginStore((state) => state.username);
   const entries = useDatabaseStore((state) => state.entries);
   const { cart } = entries.find(
     (entry) => entry.username === username
@@ -63,34 +74,20 @@ const CartDetails = ({ username }: { username: string }) => {
   );
 };
 
-const Profile = ({ username }: { username: string }) => {
+const Profile = () => {
   return (
     <Flex gap="md" align="center" justify={"center"}>
-      <Group
-        bd="1px solid darkgray"
-        style={{ borderRadius: "1rem" }}
-        p="0.5rem 1rem"
-        bg={"white"}
-      >
-        <CreateAvatar />
-        <Text size="xl" fs="italic">
-          {username}
-        </Text>
-      </Group>
-      <CartDetails username={username} />
+      <ProfileButton />
+      <CartDetails />
       <LogoutButton />
     </Flex>
   );
 };
 
-const UserSection: TReact = () => {
+const UserSection = () => {
   const username = useLoginStore((state) => state.username);
 
-  return username !== EMPTYSTRING ? (
-    <Profile username={username} />
-  ) : (
-    <LoginButton />
-  );
+  return username !== EMPTYSTRING ? <Profile /> : <LoginButton />;
 };
 
 export default UserSection;

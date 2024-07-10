@@ -1,7 +1,17 @@
-import { Flex, Text } from "@mantine/core";
-import { Link } from "react-router-dom";
 import UserSection from "../User-Section/User-Section";
+import { Link } from "react-router-dom";
 import { PATH } from "../utils/constant";
+import { Flex, Text } from "@mantine/core";
+
+const Logo = () => {
+  return (
+    <Link to={PATH.home} style={{ all: "unset" }}>
+      <Text fw={700} fz={"h1"}>
+        AntStack
+      </Text>
+    </Link>
+  );
+};
 
 const NavigationBar = () => {
   return (
@@ -14,11 +24,7 @@ const NavigationBar = () => {
       align={"center"}
       justify={"space-between"}
     >
-      <Link to={PATH.home} style={{ all: "unset" }}>
-        <Text fw={700} fz={"h1"}>
-          AntStack
-        </Text>
-      </Link>
+      <Logo />
       <UserSection />
     </Flex>
   );

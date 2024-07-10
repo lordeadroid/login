@@ -104,7 +104,7 @@ const LoginPage: TReact = () => {
           <Link to={PATH.signup}>Signup</Link>
         </Flex>
       </Flex>
-      <Image src={backgroundImage} />
+      <Image src={backgroundImage} alt="login page" />
     </Flex>
   );
 };

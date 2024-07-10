@@ -50,7 +50,7 @@ const HomePage = () => {
                   pos="relative"
                   h="30rem"
                 >
-                  <Image src={thumbnail} />
+                  <Image src={thumbnail} alt={`Image of ${title}`} />
                   <Text fz={"lg"} fw={600}>
                     {title}
                   </Text>

@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   const image = "https://ui.mantine.dev/_next/static/media/image.11cd6c19.svg";
+
   return (
     <Flex p={"10rem"} className={styles.root}>
       <SimpleGrid spacing={{ base: 40, sm: 80 }} cols={{ base: 1, sm: 2 }}>
-        <Image src={image} className={styles.mobileImage} />
+        <Image src={image} className={styles.mobileImage} alt="404 error" />
         <div>
           <Title className={styles.title}>Something is not right...</Title>
           <Text c="dimmed" size="lg">
@@ -26,7 +27,7 @@ const ErrorPage = () => {
             </Button>
           </Link>
         </div>
-        <Image src={image} className={styles.desktopImage} />
+        <Image src={image} className={styles.desktopImage} alt="404 error" />
       </SimpleGrid>
     </Flex>
   );

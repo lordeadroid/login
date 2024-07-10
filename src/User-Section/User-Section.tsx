@@ -57,7 +57,7 @@ const CartDetails = ({ username }: { username: string }) => {
       p={"xs"}
       style={{ borderRadius: "0.5rem" }}
     >
-      <Image src={cartIcon} h={30} />
+      <Image src={cartIcon} h={30} alt="image of cart" />
       <Text c={"white"}>{cart.length}</Text>
     </Flex>
   );

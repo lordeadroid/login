@@ -93,6 +93,7 @@ const ProductPage = () => {
                     onClick={() => setSelectedImg(index)}
                   >
                     <Image
+                      alt={`Image of ${title}`}
                       src={imgUrl}
                       radius={"sm"}
                       bg={isSelectedImg ? "white" : "whitesmoke"}
@@ -123,7 +124,7 @@ const ProductPage = () => {
             </Flex>
             <Skeleton visible={isFetching}>
               <Flex h={"47rem"} w={"40rem"}>
-                <Image src={images[selectedImg]} />
+                <Image src={images[selectedImg]} alt={`Image of ${title}`} />
               </Flex>
             </Skeleton>
           </Flex>

@@ -1,15 +1,16 @@
-import { Button, Flex, Image, Text } from "@mantine/core";
+import cartIcon from "../assets/cart.png";
+import { CreateAvatar } from "../Lib";
+import { notifyUser } from "../utils/utils";
+import { TReact, TSignupFormData } from "../types";
+import { Button, Flex, Group, Image, Text } from "@mantine/core";
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { useDatabaseStore, useLoginStore } from "../utils/use-store";
 import {
   EMPTYSTRING,
   NOTIFICATION_MSG,
   NOTIFICATION_TYPE,
   PATH,
 } from "../utils/constant";
-import { TReact, TSignupFormData } from "../types";
-import { useDatabaseStore, useLoginStore } from "../utils/use-store";
-import cartIcon from "../assets/cart.png";
-import { notifyUser } from "../utils/utils";
 
 const LogoutButton: TReact = () => {
   const resetUsername = useLoginStore((state) => state.resetUsername);
@@ -65,9 +66,17 @@ const CartDetails = ({ username }: { username: string }) => {
 const Profile = ({ username }: { username: string }) => {
   return (
     <Flex gap="md" align="center" justify={"center"}>
-      <Text size="xl" fs="italic">
-        {username}
-      </Text>
+      <Group
+        bd="1px solid darkgray"
+        style={{ borderRadius: "1rem" }}
+        p="0.5rem 1rem"
+        bg={"white"}
+      >
+        <CreateAvatar />
+        <Text size="xl" fs="italic">
+          {username}
+        </Text>
+      </Group>
       <CartDetails username={username} />
       <LogoutButton />
     </Flex>

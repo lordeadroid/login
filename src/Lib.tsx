@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { Avatar, Button } from "@mantine/core";
 import { useDatabaseStore, useLoginStore } from "./utils/use-store";
 import { TAddToCartButton, TButton, TSignupFormData } from "./types";
 import { notifyUser } from "./utils/utils";
@@ -39,4 +39,13 @@ export const AddToCartButton = (props: TAddToCartButton) => {
       handleClick={handleClick}
     />
   );
+};
+
+export const CreateAvatar = () => {
+  const avatarId = Math.floor(Math.random() * 10);
+
+  // eslint-disable-next-line max-len
+  const avatarURL = `https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-${avatarId}.png`;
+
+  return <Avatar src={avatarURL} radius="xl" />;
 };

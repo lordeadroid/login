@@ -1,6 +1,6 @@
 import { notifications } from "@mantine/notifications";
 import { TSignupFormData, TUserExist, TVerifiedUser } from "../types";
-import { LOCALSTORAGE, RATING } from "./constant";
+import { EMPTYSTRING, LOCALSTORAGE, RATING } from "./constant";
 
 export const updateLoginInfo = (username: string) => {
   localStorage.setItem(
@@ -16,7 +16,7 @@ export const hashString = async (input: string): Promise<string> => {
 
   return Array.from(new Uint8Array(hash))
     .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+    .join(EMPTYSTRING);
 };
 
 export const userExist: TUserExist = (db, username) => {

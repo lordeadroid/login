@@ -72,6 +72,7 @@ export type TButton = {
   value?: string;
   size?: string;
   color?: string;
+  w?: string;
   handleClick?: () => void;
 };
 

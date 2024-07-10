@@ -7,15 +7,41 @@ import { useLoginStore } from "../utils/use-store";
 import { Link, useNavigate } from "react-router-dom";
 import { EMPTYSTRING, PATH } from "../utils/constant";
 import { AddToCartButton, CreateButton } from "../Lib";
-import {
-  Badge,
-  Button,
-  Card,
-  Flex,
-  Image,
-  Skeleton,
-  Text,
-} from "@mantine/core";
+import { Badge, Card, Flex, Image, Skeleton, Text } from "@mantine/core";
+
+const CreateCard = ({ productData }: { productData: TProduct }) => {
+  const { id, title, price, rating, tags, thumbnail } = productData;
+
+  return (
+    <Card withBorder className={styles.card} radius="md" w="20rem">
+      <Flex justify="space-between" direction="column" pos="relative" h="30rem">
+        <Image src={thumbnail} alt={`Image of ${title}`} />
+        <Text fz={"lg"} fw={600}>
+          {title}
+        </Text>
+        <Flex w={"100%"} pos={"absolute"} justify={"space-between"}>
+          <CreateButton value={`${rating}`} color={ratingColor(rating)} />
+          <AddToCartButton productName={title} id={id} />
+        </Flex>
+        <Card.Section className={styles.section}>
+          {tags.map((tag, index) => {
+            return (
+              <Badge variant="light" key={index} m={"0.25rem"}>
+                {tag}
+              </Badge>
+            );
+          })}
+        </Card.Section>
+        <Flex gap={"xs"}>
+          <Link to={`products/${id}`}>
+            <CreateButton value="More Details" w="11rem" size="sm" />
+          </Link>
+          <CreateButton value={`$${price}`} color="teal" w="6rem" size="sm" />
+        </Flex>
+      </Flex>
+    </Card>
+  );
+};
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -37,55 +63,14 @@ const HomePage = () => {
   }, [navigate, username, isLoading]);
 
   return (
-    <Flex wrap={"wrap"}>
-      <Flex wrap={"wrap"} justify={"center"} gap="4vh">
-        {productsData.map((product) => {
-          const { id, title, price, rating, tags, thumbnail } = product;
-          return (
-            <Skeleton w={"20rem"} visible={isLoading} key={id}>
-              <Card withBorder className={styles.card} radius="md" w="20rem">
-                <Flex
-                  justify="space-between"
-                  direction="column"
-                  pos="relative"
-                  h="30rem"
-                >
-                  <Image src={thumbnail} alt={`Image of ${title}`} />
-                  <Text fz={"lg"} fw={600}>
-                    {title}
-                  </Text>
-                  <Flex w={"100%"} pos={"absolute"} justify={"space-between"}>
-                    <CreateButton
-                      value={`${rating}`}
-                      color={ratingColor(rating)}
-                    />
-                    <AddToCartButton productName={title} id={id} />
-                  </Flex>
-                  <Card.Section className={styles.section}>
-                    {tags.map((tag, index) => {
-                      return (
-                        <Badge variant="light" key={index} m={"0.25rem"}>
-                          {tag}
-                        </Badge>
-                      );
-                    })}
-                  </Card.Section>
-                  <Flex gap={"xs"}>
-                    <Link to={`products/${id}`}>
-                      <Button radius="md" style={{ flex: 1 }} w={"11rem"}>
-                        More Details
-                      </Button>
-                    </Link>
-                    <Button radius="md" style={{ flex: 1 }} color="teal">
-                      ${price}
-                    </Button>
-                  </Flex>
-                </Flex>
-              </Card>
-            </Skeleton>
-          );
-        })}
-      </Flex>
+    <Flex wrap={"wrap"} justify={"center"} gap={"2rem"}>
+      {productsData.map((productData) => {
+        return (
+          <Skeleton w={"20rem"} visible={isLoading} key={productData.id}>
+            <CreateCard productData={productData} />
+          </Skeleton>
+        );
+      })}
     </Flex>
   );
 };

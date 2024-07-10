@@ -1,14 +1,14 @@
+import { notifyUser } from "./utils/utils";
 import { Avatar, Button } from "@mantine/core";
+import { EMPTYSTRING, NOTIFICATION_MSG } from "./utils/constant";
 import { useDatabaseStore, useLoginStore } from "./utils/use-store";
 import { TAddToCartButton, TButton, TSignupFormData } from "./types";
-import { notifyUser } from "./utils/utils";
-import { NOTIFICATION_MSG } from "./utils/constant";
 
 export const CreateButton = (props: TButton) => {
-  const { value, size = "xs", color, handleClick } = props;
+  const { value, color, handleClick, size = "xs", w = EMPTYSTRING } = props;
 
   return (
-    <Button size={size} color={color} onClick={handleClick}>
+    <Button size={size} color={color} w={w} onClick={handleClick}>
       {value}
     </Button>
   );
